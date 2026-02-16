@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "npx @tailwindcss/cli -i ./src/styles.css -o ./dist/styles.css --watch",
+    "dev": "npx @tailwindcss/cli -i ./src/styles.css -o ./dist/styles.css --watch=always",
     "build": "npx @tailwindcss/cli -i ./src/styles.css -o ./dist/styles.css --minify"
   },
   "keywords": [],
