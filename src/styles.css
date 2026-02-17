@@ -24,13 +24,13 @@
 
 .headline-word {
   display: inline-block;
-  font-size: clamp(4rem, 12vw, 11rem);
+  font-size: clamp(5rem, 15vw, 14rem);
   line-height: 0.9;
   opacity: 0; /* GSAP reveals */
 }
 
 #text-not {
-  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-size: clamp(4.5rem, 12vw, 11rem);
   line-height: 0.9;
   letter-spacing: -0.02em;
   opacity: 0; /* GSAP reveals */
