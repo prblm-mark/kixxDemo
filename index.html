@@ -7,7 +7,29 @@
     <link rel="stylesheet" href="./dist/styles.css">
 </head>
 <body>
-    <h1 class="text-9xl font-display font-normal text-black uppercase antialiased tracking-tight">Kixx Demo</h1>
+    <section id="hero" class="relative min-h-screen bg-kixx-orange flex items-center justify-center overflow-hidden">
+        <!-- Logo -->
+        <img id="logo" src="./src/img/kixx-circle.svg" alt="Kixx Football Academy"
+             class="absolute top-6 right-6 w-28 md:w-36 opacity-0"
+             style="mix-blend-mode: difference;">
+
+        <!-- Headline -->
+        <h1 class="text-center px-4">
+            <!-- Line 1: IT'S  NOT  ABOUT -->
+            <span class="block">
+                <span class="headline-word font-title text-black mr-4">IT'S</span>
+<!--                 <span id="text-not" class="font-display text-white inline-block relative" style="transform: rotate(-12deg); margin: 0 -0.1em;"> -->
+<!--                     NOT -->
+<!--                 </span> -->
+                <span class="headline-word font-title text-black"> ABOUT</span>
+            </span>
+            <!-- Line 2: THE SCORE -->
+            <span class="block">
+                <span class="headline-word font-title text-black mr-4">THE</span>
+              <span class="headline-word font-title text-black"> SCORE</span>
+            </span>
+        </h1>
+    </section>
     <!-- GSAP Core -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
     <!-- GSAP Plugins -->

@@ -19,4 +19,19 @@
 @theme {
   --font-display: "Atomic", sans-serif;
   --font-title: "GraphikXXXBold", sans-serif;
+  --color-kixx-orange: #FF7500;
+}
+
+.headline-word {
+  display: inline-block;
+  font-size: clamp(4rem, 12vw, 11rem);
+  line-height: 0.9;
+  opacity: 0; /* GSAP reveals */
+}
+
+#text-not {
+  font-size: clamp(3.5rem, 10vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  opacity: 0; /* GSAP reveals */
 }
