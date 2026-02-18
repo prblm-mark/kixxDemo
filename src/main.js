@@ -11,6 +11,8 @@ document.fonts.ready.then(() => {
   const wordScore = document.getElementById("word-score");
   const wordGrowth = document.getElementById("word-growth");
   const growthRows = document.querySelectorAll("[data-growth-row]");
+  const growthPhotoCycler = document.getElementById("growth-photo-cycler");
+  const growthPhotos = growthPhotoCycler.querySelectorAll("img");
 
   // Initial states
   gsap.set(headlineWords, { opacity: 0, scale: 5 });
@@ -18,6 +20,7 @@ document.fonts.ready.then(() => {
   gsap.set(logo, { opacity: 0, y: -20 });
   gsap.set(wordGrowth, { opacity: 0, scale: 0 });
   gsap.set(growthRows, { opacity: 0, y: 0 });
+  gsap.set(growthPhotoCycler, { opacity: 0, scale: 0 });
 
   // Build the timeline (paused for scrubber control)
   const tl = gsap.timeline({ paused: true });
@@ -37,7 +40,7 @@ document.fonts.ready.then(() => {
   .to(textNot, { opacity: 1, scale: 1, x: "-0.25em", rotation: -12, duration: 0.6, zIndex: 1, ease: "expo.out" }, "<")
 
   // Phase 3: Black wipe with text color inversion
-  .to(wipePanel, { scaleX: 1, duration: 0.6, ease: "power2.inOut" }, "-=0.3")
+  .to(wipePanel, { scaleX: 1, duration: 0.6, ease: "power2.inOut" }, "-=0.25")
   .to(textNot, { opacity: 0, scale: 0.5, duration: 0.25, ease: "power2.in" }, "<+=0.2")
   .to(wordIts, { x: "0em", duration: 0.6, ease: "power2.inOut" }, "<")
   .to(wordAbout, { x: "0em", duration: 0.6, ease: "power2.inOut" }, "<")
@@ -63,6 +66,42 @@ document.fonts.ready.then(() => {
       ease: "back.out(2)",
     }, `phase5+=${delay}`);
   });
+
+  // Growth photo: starts during Phase 4, scales + cycles through Phase 5
+  tl.to(growthPhotoCycler, { opacity: 0.5, scale: 1, duration: 1.0, ease: "power2.out" }, "phase5-=0.45")
+  .add((() => {
+    const totalImages = growthPhotos.length;
+    const cycles = 2;
+    const finalIndex = totalImages - 1;
+    const sequence = [];
+    for (let c = 0; c < cycles; c++) {
+      for (let i = 0; i < totalImages; i++) sequence.push(i);
+    }
+    for (let i = 0; i <= finalIndex; i++) sequence.push(i);
+
+    const playhead = { frame: 0 };
+    let currentFrame = -1;
+
+    function updateFrame() {
+      const stepIndex = Math.min(Math.round(playhead.frame), sequence.length - 1);
+      const imageIndex = sequence[stepIndex];
+      if (imageIndex === currentFrame) return;
+      growthPhotos.forEach((img, i) => {
+        img.style.opacity = i === imageIndex ? 1 : 0;
+      });
+      currentFrame = imageIndex;
+    }
+
+    updateFrame();
+
+    return gsap.to(playhead, {
+      frame: sequence.length - 1,
+      duration: 1.0,
+      ease: "power2.out",
+      snap: 1,
+      onUpdate: updateFrame,
+    });
+  })(), "<");
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);
