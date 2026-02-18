@@ -31,6 +31,15 @@
   opacity: 0; /* GSAP reveals */
 }
 
+.growth-outline {
+  display: inline-block;
+  font-size: clamp(5rem, 15vw, 14rem);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 2px #FF7500;
+  opacity: 0; /* GSAP reveals */
+}
+
 #text-not {
   font-size: clamp(4.5rem, 12vw, 11rem);
   line-height: 0.9;
