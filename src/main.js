@@ -42,12 +42,12 @@ document.fonts.ready.then(() => {
   // Phase 3: Black wipe with text color inversion
   .to(wipePanel, { scaleX: 1, duration: 0.6, ease: "power2.inOut" }, "-=0.25")
   .to(textNot, { opacity: 0, scale: 0.5, duration: 0.25, ease: "power2.in" }, "<+=0.2")
-  .to(wordIts, { x: "0em", duration: 0.6, ease: "power2.inOut" }, "<")
-  .to(wordAbout, { x: "0em", duration: 0.6, ease: "power2.inOut" }, "<")
+  .to(wordIts, { x: "0em", duration: 0.4, ease: "power2.inOut" }, "<")
+  .to(wordAbout, { x: "0em", duration: 0.4, ease: "power2.inOut" }, "<")
   .to([wordThe, wordScore], { opacity: 0, y: 60, duration: 0.3, stagger: 0.05, ease: "power2.in" }, "<-=0.05")
 
   // Phase 4: IT'S/ABOUT scale out + GROWTH scales in
-  .to(wordIts, { opacity: 0, scale: 5, x: "-2em", duration: 0.25, ease: "power2.in" }, "+=0.2")
+  .to(wordIts, { opacity: 0, scale: 5, x: "-2em", duration: 0.25, ease: "power2.in" }, "+=0.1")
   .to(wordAbout, { opacity: 0, scale: 5, x: "2em", duration: 0.25, ease: "power2.in" }, "<")
   .to(wordGrowth, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(3)" }, "<+=0.1")
 
@@ -67,8 +67,8 @@ document.fonts.ready.then(() => {
     }, `phase5+=${delay}`);
   });
 
-  // Growth photo: starts during Phase 4, scales + cycles through Phase 5
-  tl.to(growthPhotoCycler, { opacity: 0.5, scale: 1, duration: 1.0, ease: "power2.out" }, "phase5-=0.45")
+  // Growth photo: starts during Phase 4, scales through Phase 5 into Phase 6
+  tl.to(growthPhotoCycler, { opacity: 0.5, scale: 1, duration: 2.2, ease: "power2.out" }, "phase5-=0.45")
   .add((() => {
     const totalImages = growthPhotos.length;
     const cycles = 2;
@@ -102,6 +102,29 @@ document.fonts.ready.then(() => {
       onUpdate: updateFrame,
     });
   })(), "<");
+
+  // Phase 6a: GROWTH goes outline + outer rows exit
+  tl.addLabel("phase6", "phase5+=0.15");
+
+  // Main GROWTH: solid fill → outline stroke
+  tl.set(wordGrowth, { webkitTextStroke: "2px #FF7500" }, "phase6")
+  .to(wordGrowth, { color: "rgba(255, 117, 0, 0)", duration: 0.2, ease: "power2.inOut" }, "phase6")
+
+  // Outer rows fade out
+  const outerRows = document.querySelectorAll("[data-growth-row='-2'], [data-growth-row='2']");
+  tl.to(outerRows, { opacity: 0, duration: 0.3, ease: "power2.in" }, "phase6")
+
+  // Phase 6b: ScrambleText GROWTH → REAL
+  const innerRows = [
+    document.querySelector("[data-growth-row='-1']"),
+    wordGrowth,
+    document.querySelector("[data-growth-row='1']"),
+  ];
+  tl.to(innerRows, {
+    scrambleText: { text: "REAL", chars: "GROWTHEAL", speed: 0.6 },
+    duration: 0.35,
+    stagger: 0.03,
+  }, "phase6+=0.15");
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);
