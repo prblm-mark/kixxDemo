@@ -26,6 +26,8 @@
   display: inline-block;
   font-size: clamp(5rem, 15vw, 14rem);
   line-height: 0.9;
+  color: #FF7500;
+  mix-blend-mode: difference;
   opacity: 0; /* GSAP reveals */
 }
 

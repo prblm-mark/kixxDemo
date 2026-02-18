@@ -7,26 +7,29 @@
     <link rel="stylesheet" href="./dist/styles.css">
 </head>
 <body>
-    <section id="hero" class="relative min-h-screen bg-kixx-orange flex items-center justify-center overflow-hidden">
+    <section id="hero" class="relative isolate min-h-screen bg-kixx-orange flex items-center justify-center overflow-hidden">
         <!-- Logo -->
         <img id="logo" src="./src/img/kixx-circle.svg" alt="Kixx Football Academy"
              class="absolute top-6 right-6 w-28 md:w-36 opacity-0"
              style="mix-blend-mode: difference;">
 
+        <!-- Black wipe panel -->
+        <div id="wipe-panel" class="absolute inset-0 bg-black origin-left scale-x-0"></div>
+
         <!-- Headline -->
-        <h1 class="text-center px-4">
+        <h1 class="relative text-center px-4">
             <!-- Line 1: IT'S  NOT  ABOUT -->
             <span class="block relative">
-                <span id="word-its" class="headline-word font-title text-black">IT'S</span>
+                <span id="word-its" class="headline-word font-title mt-4">IT'S</span>
                 <span id="text-not" class="font-display text-white inline-block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0">
                     NOT
                 </span>
-                <span id="word-about" class="headline-word font-title text-black">ABOUT</span>
+                <span id="word-about" class="headline-word font-title ml-4">ABOUT</span>
             </span>
             <!-- Line 2: THE SCORE -->
             <span class="block">
-                <span class="headline-word font-title text-black mr-4">THE</span>
-              <span class="headline-word font-title text-black"> SCORE</span>
+                <span id="word-the" class="headline-word font-title mr-4">THE</span>
+              <span id="word-score" class="headline-word font-title"> SCORE</span>
             </span>
         </h1>
     </section>
@@ -39,6 +42,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrambleTextPlugin.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js"></script>
     <!-- App -->
+    <script src="./src/debug-controls.js"></script>
     <script src="./src/main.js"></script>
 </body>
 </html>
