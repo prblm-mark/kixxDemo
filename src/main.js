@@ -1,7 +1,7 @@
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, TextPlugin, ScrambleTextPlugin, SplitText);
 
 document.fonts.ready.then(() => {
-  const headlineWords = document.querySelectorAll(".headline-word");
+  const headlineWords = document.querySelectorAll(".headline-word:not(#word-growth)");
   const textNot = document.getElementById("text-not");
   const wordIts = document.getElementById("word-its");
   const wordAbout = document.getElementById("word-about");
@@ -9,11 +9,13 @@ document.fonts.ready.then(() => {
   const wipePanel = document.getElementById("wipe-panel");
   const wordThe = document.getElementById("word-the");
   const wordScore = document.getElementById("word-score");
+  const wordGrowth = document.getElementById("word-growth");
 
   // Initial states
   gsap.set(headlineWords, { opacity: 0, scale: 5 });
   gsap.set(textNot, { opacity: 0, scale: 0.5 });
   gsap.set(logo, { opacity: 0, y: -20 });
+  gsap.set(wordGrowth, { opacity: 0, scale: 0 });
 
   // Build the timeline (paused for scrubber control)
   const tl = gsap.timeline({ paused: true });
@@ -23,7 +25,7 @@ document.fonts.ready.then(() => {
     opacity: 1,
     scale: 1,
     duration: 0.5,
-    stagger: 0.12,
+    stagger: 0.08,
     ease: "back.out(2.5)",
   })
 
@@ -37,7 +39,12 @@ document.fonts.ready.then(() => {
   .to(textNot, { opacity: 0, scale: 0.5, duration: 0.25, ease: "power2.in" }, "<+=0.2")
   .to(wordIts, { x: "0em", duration: 0.6, ease: "power2.inOut" }, "<")
   .to(wordAbout, { x: "0em", duration: 0.6, ease: "power2.inOut" }, "<")
-  .to([wordThe, wordScore], { opacity: 0, y: 60, duration: 0.3, stagger: 0.05, ease: "power2.in" }, "<-=0.05");
+  .to([wordThe, wordScore], { opacity: 0, y: 60, duration: 0.3, stagger: 0.05, ease: "power2.in" }, "<-=0.05")
+
+  // Phase 4: IT'S/ABOUT scale out + GROWTH scales in
+  .to(wordIts, { opacity: 0, scale: 5, x: "-2em", duration: 0.25, ease: "power2.in" }, "+=0.1")
+  .to(wordAbout, { opacity: 0, scale: 5, x: "2em", duration: 0.25, ease: "power2.in" }, "<")
+  .to(wordGrowth, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(3)" }, "<+=0.1");
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);
