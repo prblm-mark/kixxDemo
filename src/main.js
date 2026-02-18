@@ -96,7 +96,7 @@ document.fonts.ready.then(() => {
 
     return gsap.to(playhead, {
       frame: sequence.length - 1,
-      duration: 1.0,
+      duration: 2.2,
       ease: "power2.out",
       snap: 1,
       onUpdate: updateFrame,
