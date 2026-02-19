@@ -13,6 +13,10 @@ document.fonts.ready.then(() => {
   const growthRows = document.querySelectorAll("[data-growth-row]");
   const growthPhotoCycler = document.getElementById("growth-photo-cycler");
   const growthPhotos = growthPhotoCycler.querySelectorAll("img");
+  const wordGrowthText     = wordGrowth.querySelector("[data-growth-text]");
+  const benefitFriendships = document.getElementById("benefit-friendships");
+  const benefitProgress    = document.getElementById("benefit-progress");
+  const benefitConfidence  = document.getElementById("benefit-confidence");
 
   // Initial states
   gsap.set(headlineWords, { opacity: 0, scale: 5 });
@@ -21,6 +25,7 @@ document.fonts.ready.then(() => {
   gsap.set(wordGrowth, { opacity: 0, scale: 0 });
   gsap.set(growthRows, { opacity: 0, y: 0 });
   gsap.set(growthPhotoCycler, { opacity: 0, scale: 0 });
+  gsap.set([benefitFriendships, benefitProgress, benefitConfidence], { opacity: 0, x: "-2em" });
 
   // Build the timeline (paused for scrubber control)
   const tl = gsap.timeline({ paused: true });
@@ -106,25 +111,48 @@ document.fonts.ready.then(() => {
   // Phase 6a: GROWTH goes outline + outer rows exit
   tl.addLabel("phase6", "phase5+=0.6");
 
-  // Main GROWTH: solid fill → outline stroke
-  tl.set(wordGrowth, { webkitTextStroke: "2px #FF7500" }, "phase6")
-  .to(wordGrowth, { color: "rgba(255, 117, 0, 0)", duration: 0.2, ease: "power2.inOut" }, "phase6")
+  // Main GROWTH inner text: solid fill → outline stroke
+  tl.set(wordGrowthText, { webkitTextStroke: "2px #FF7500" }, "phase6")
+  .to(wordGrowthText, { color: "rgba(255, 117, 0, 0)", duration: 0.2, ease: "power2.inOut" }, "phase6")
 
   // Outer rows fade out
   const outerRows = document.querySelectorAll("[data-growth-row='-2'], [data-growth-row='2']");
   tl.to(outerRows, { opacity: 0, duration: 0.3, ease: "power2.in" }, "phase6")
 
-  // Phase 6b: ScrambleText GROWTH → REAL
-  const innerRows = [
+  // Phase 6b: ScrambleText GROWTH → REAL (target inner text spans only)
+  const innerRowTexts = [
+    document.querySelector("[data-growth-row='-1'] [data-growth-text]"),
+    wordGrowthText,
+    document.querySelector("[data-growth-row='1'] [data-growth-text]"),
+  ];
+  // Outer row spans — used for Phase 6.3 slide (benefit words travel with them)
+  const innerRowWraps = [
     document.querySelector("[data-growth-row='-1']"),
     wordGrowth,
     document.querySelector("[data-growth-row='1']"),
   ];
-  tl.to(innerRows, {
+
+  tl.to(innerRowTexts, {
     scrambleText: { text: "REAL", chars: "GROWTHEAL", speed: 0.6 },
     duration: 0.35,
     stagger: 0.03,
   }, "phase6+=0.15");
+
+  // Phase 6.3: rows slide left — benefit words travel with them
+  tl.addLabel("phase63", "phase6+=0.2")
+  .to(innerRowWraps, {
+    x: "-20vw",
+    duration: 0.5,
+    ease: "expo.out",
+    stagger: 0.06,
+  }, "phase63")
+
+  // Phase 6.4/6.5: benefit words emerge from behind REAL (x: -2em → 0em)
+  .addLabel("phase64", "phase63+=0.2")
+  .to(benefitFriendships, { opacity: 1, x: "0em", duration: 0.45, ease: "expo.out" }, "phase64")
+  .to(benefitProgress,    { opacity: 1, x: "0em", duration: 0.45, ease: "expo.out" }, "phase64+=0.1")
+  .addLabel("phase65", "phase64+=0.2")
+  .to(benefitConfidence,  { opacity: 1, x: "0em", duration: 0.45, ease: "expo.out" }, "phase65");
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);

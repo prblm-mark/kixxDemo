@@ -40,6 +40,18 @@
   opacity: 0; /* GSAP reveals */
 }
 
+.benefit-word {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  white-space: nowrap;
+  font-size: clamp(5rem, 15vw, 14rem);
+  line-height: 0.9;
+  color: #FF7500;
+  -webkit-text-stroke-width: 0;
+  opacity: 0;
+}
+
 #text-not {
   font-size: clamp(4.5rem, 12vw, 11rem);
   line-height: 0.9;
