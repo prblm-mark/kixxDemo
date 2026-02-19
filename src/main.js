@@ -104,7 +104,7 @@ document.fonts.ready.then(() => {
   })(), "<");
 
   // Phase 6a: GROWTH goes outline + outer rows exit
-  tl.addLabel("phase6", "phase5+=0.15");
+  tl.addLabel("phase6", "phase5+=0.6");
 
   // Main GROWTH: solid fill → outline stroke
   tl.set(wordGrowth, { webkitTextStroke: "2px #FF7500" }, "phase6")
