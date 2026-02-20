@@ -25,6 +25,7 @@ document.fonts.ready.then(() => {
   gsap.set(wordGrowth, { opacity: 0, scale: 0 });
   gsap.set(growthRows, { opacity: 0, y: 0 });
   gsap.set(growthPhotoCycler, { opacity: 0, scale: 0 });
+  gsap.set("[data-growth-text]", { display: "inline-block" });
   gsap.set([benefitFriendships, benefitProgress, benefitConfidence], { opacity: 0, x: "-2em" });
 
   // Build the timeline (paused for scrubber control)
@@ -158,6 +159,23 @@ document.fonts.ready.then(() => {
     ease: "expo.out",
     stagger: 0.1,
   }, "phase64")
+
+  // Phase 7: REAL rows exit left, benefit words exit right — random stagger, simultaneous start
+  tl.addLabel("phase7", "phase64+=0.6")
+
+  .to(innerRowTexts, {
+    x: () => `${gsap.utils.random(-80, -140)}vw`,
+    duration: 0.6,
+    ease: "expo.in",
+    stagger: { each: 0.08, from: "random" },
+  }, "phase7")
+
+  .to([benefitFriendships, benefitProgress, benefitConfidence], {
+    x: () => `${gsap.utils.random(80, 140)}vw`,
+    duration: 0.6,
+    ease: "expo.in",
+    stagger: { each: 0.08, from: "random" },
+  }, "phase7");
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);
