@@ -73,11 +73,13 @@ document.fonts.ready.then(() => {
   });
 
   // Growth photo: starts during Phase 4, scales through Phase 5 into Phase 6
-  tl.to(growthPhotoCycler, { opacity: 0.5, scale: 1, duration: 2.2, ease: "power2.out" }, "phase5-=0.45")
+  // scaleDuration shared between scale tween and cycler so they always finish together
+  const scaleDuration = 2.2;
+  tl.to(growthPhotoCycler, { opacity: 0.5, scale: 1.4, duration: scaleDuration, ease: "power2.out" }, "phase5-=0.45")
   .add((() => {
     const totalImages = growthPhotos.length;
     const cycles = 2;
-    const finalIndex = totalImages - 1;
+    const finalIndex = Array.from(growthPhotos).findIndex(img => img.src.includes("DSC02398.webp"));
     const sequence = [];
     for (let c = 0; c < cycles; c++) {
       for (let i = 0; i < totalImages; i++) sequence.push(i);
@@ -101,7 +103,7 @@ document.fonts.ready.then(() => {
 
     return gsap.to(playhead, {
       frame: sequence.length - 1,
-      duration: 2.2,
+      duration: scaleDuration,
       ease: "power2.out",
       snap: 1,
       onUpdate: updateFrame,
@@ -147,12 +149,15 @@ document.fonts.ready.then(() => {
     stagger: 0.06,
   }, "phase63")
 
-  // Phase 6.4/6.5: benefit words emerge from behind REAL (x: -2em → 0em)
+  // Phase 6.4: benefit words emerge from behind REAL (x: -2em → 0em)
   .addLabel("phase64", "phase63+=0.4")
-  .to(benefitFriendships, { opacity: 1, x: "0em", duration: 0.45, ease: "expo.out" }, "phase64")
-  .to(benefitProgress,    { opacity: 1, x: "0em", duration: 0.45, ease: "expo.out" }, "phase64+=0.1")
-  .addLabel("phase65", "phase64+=0.2")
-  .to(benefitConfidence,  { opacity: 1, x: "0em", duration: 0.45, ease: "expo.out" }, "phase65");
+  .to([benefitFriendships, benefitProgress, benefitConfidence], {
+    opacity: 1,
+    x: "0em",
+    duration: 0.45,
+    ease: "expo.out",
+    stagger: 0.1,
+  }, "phase64");
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);
