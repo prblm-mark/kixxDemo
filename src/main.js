@@ -201,7 +201,13 @@ document.fonts.ready.then(() => {
     .to(wordIsAbout, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, "phase8+=0.13")
 
     // KIXX explodes in from massive scale, slightly offset
-    .to(wordKixxClosing, { opacity: 1, scale: 1, duration: 0.55, ease: "expo.out" }, "phase8+=0.22");
+    .to(wordKixxClosing, { opacity: 1, scale: 1, duration: 0.55, ease: "expo.out" }, "phase8+=0.22")
+
+  // Phase 8 exit
+  .addLabel("phase8exit", "phase8+=1.2")
+    .to(wordKixxClosing, { opacity: 0, duration: 0.4, ease: "power2.in" }, "phase8exit")
+    .to(wordThatsWhat, { y: "-120%", opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05")
+    .to(wordIsAbout, { y: "120%", opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05");
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);
