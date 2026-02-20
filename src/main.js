@@ -22,7 +22,7 @@ document.fonts.ready.then(() => {
   const wordIsAbout        = document.getElementById("word-is-about");
 
   // Initial states
-  gsap.set(headlineWords, { opacity: 0, scale: 5 });
+  gsap.set(headlineWords, { opacity: 0, scale: 5, color: "#000000" });
   gsap.set(textNot, { opacity: 0, scale: 0.5 });
   gsap.set(logo, { opacity: 0, y: -20 });
   gsap.set(wordGrowth, { opacity: 0, scale: 0 });
@@ -44,6 +44,7 @@ document.fonts.ready.then(() => {
     stagger: 0.08,
     ease: "back.out(2.5)",
   })
+  .set(headlineWords, { color: "#FF7500", mixBlendMode: "difference" })
 
   // Phase 2: IT'S and ABOUT spread apart while NOT fades in and scales up
   .to(wordIts, { x: "-0.4em", duration: 0.6, ease: "expo.out" }, "+=0.1")
@@ -191,7 +192,7 @@ document.fonts.ready.then(() => {
   tl.addLabel("phase8", "phase7+=0.4")
 
     // Fade out photo cycler
-    .to(growthPhotoCycler, { opacity: 0, duration: 0.5, ease: "power2.in" }, "phase8")
+    .to(growthPhotoCycler, { opacity: 0.25, duration: 0.5, ease: "power2.in" }, "phase8")
 
     // THATS WHAT crashes in
     .to(wordThatsWhat, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, "phase8+=0.05")
