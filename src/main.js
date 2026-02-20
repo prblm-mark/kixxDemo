@@ -109,7 +109,7 @@ document.fonts.ready.then(() => {
   })(), "<");
 
   // Phase 6a: GROWTH goes outline + outer rows exit
-  tl.addLabel("phase6", "phase5+=0.4");
+  tl.addLabel("phase6", "phase5+=0.3");
 
   // Main GROWTH inner text: solid fill → outline stroke
   tl.set(wordGrowthText, { webkitTextStroke: "2px #FF7500" }, "phase6")
@@ -133,8 +133,8 @@ document.fonts.ready.then(() => {
   ];
 
   tl.to(innerRowTexts, {
-    scrambleText: { text: "REAL", chars: "GROWTHEAL", speed: 0.6 },
-    duration: 0.35,
+    scrambleText: { text: "REAL", chars: "GROWTHEAL", speed: 0.4 },
+    duration: 0.6,
     stagger: 0.03,
   }, "phase6+=0.15");
 
@@ -142,13 +142,13 @@ document.fonts.ready.then(() => {
   tl.addLabel("phase63", "phase6+=0.2")
   .to(innerRowWraps, {
     x: "-20vw",
-    duration: 0.5,
+    duration: 0.7,
     ease: "expo.out",
     stagger: 0.06,
   }, "phase63")
 
   // Phase 6.4/6.5: benefit words emerge from behind REAL (x: -2em → 0em)
-  .addLabel("phase64", "phase63+=0.2")
+  .addLabel("phase64", "phase63+=0.4")
   .to(benefitFriendships, { opacity: 1, x: "0em", duration: 0.45, ease: "expo.out" }, "phase64")
   .to(benefitProgress,    { opacity: 1, x: "0em", duration: 0.45, ease: "expo.out" }, "phase64+=0.1")
   .addLabel("phase65", "phase64+=0.2")
