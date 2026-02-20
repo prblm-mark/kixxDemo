@@ -157,7 +157,7 @@ document.fonts.ready.then(() => {
     duration: 0.45,
     ease: "expo.out",
     stagger: 0.1,
-  }, "phase64");
+  }, "phase64")
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);
