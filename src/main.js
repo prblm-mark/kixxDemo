@@ -1,7 +1,7 @@
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, TextPlugin, ScrambleTextPlugin, SplitText);
 
 document.fonts.ready.then(() => {
-  const headlineWords = document.querySelectorAll(".headline-word:not(#word-growth)");
+  const headlineWords = document.querySelectorAll(".headline-word:not(#word-growth):not(#word-thats-what):not(#word-is-about)");
   const textNot = document.getElementById("text-not");
   const wordIts = document.getElementById("word-its");
   const wordAbout = document.getElementById("word-about");
@@ -17,6 +17,9 @@ document.fonts.ready.then(() => {
   const benefitFriendships = document.getElementById("benefit-friendships");
   const benefitProgress    = document.getElementById("benefit-progress");
   const benefitConfidence  = document.getElementById("benefit-confidence");
+  const wordThatsWhat      = document.getElementById("word-thats-what");
+  const wordKixxClosing    = document.getElementById("word-kixx-closing");
+  const wordIsAbout        = document.getElementById("word-is-about");
 
   // Initial states
   gsap.set(headlineWords, { opacity: 0, scale: 5 });
@@ -27,6 +30,8 @@ document.fonts.ready.then(() => {
   gsap.set(growthPhotoCycler, { opacity: 0, scale: 0 });
   gsap.set("[data-growth-text]", { display: "inline-block" });
   gsap.set([benefitFriendships, benefitProgress, benefitConfidence], { opacity: 0, x: "-2em" });
+  gsap.set([wordThatsWhat, wordIsAbout], { scale: 5 });
+  gsap.set(wordKixxClosing, { scale: 10, rotation: -12 });
 
   // Build the timeline (paused for scrubber control)
   const tl = gsap.timeline({ paused: true });
@@ -181,6 +186,21 @@ document.fonts.ready.then(() => {
     ease: "power2.in",
   }, "phase7")
 
+
+  // Phase 8: THATS WHAT KIXX IS ABOUT closing screen
+  tl.addLabel("phase8", "phase7+=0.4")
+
+    // Fade out photo cycler
+    .to(growthPhotoCycler, { opacity: 0, duration: 0.5, ease: "power2.in" }, "phase8")
+
+    // THATS WHAT crashes in
+    .to(wordThatsWhat, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, "phase8+=0.05")
+
+    // IS ABOUT crashes in tight behind
+    .to(wordIsAbout, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, "phase8+=0.13")
+
+    // KIXX explodes in from massive scale, slightly offset
+    .to(wordKixxClosing, { opacity: 1, scale: 1, duration: 0.55, ease: "expo.out" }, "phase8+=0.22");
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);

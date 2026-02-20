@@ -58,3 +58,11 @@
   letter-spacing: -0.02em;
   opacity: 0; /* GSAP reveals */
 }
+
+#word-kixx-closing {
+  font-size: clamp(4.5rem, 12vw, 11rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  opacity: 0; /* GSAP reveals */
+}
