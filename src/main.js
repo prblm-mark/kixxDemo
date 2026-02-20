@@ -80,12 +80,9 @@ document.fonts.ready.then(() => {
   tl.to(growthPhotoCycler, { opacity: 0.5, scale: 1.4, duration: scaleDuration, ease: "power2.out" }, "phase5-=0.45")
   .add((() => {
     const totalImages = growthPhotos.length;
-    const cycles = 2;
     const finalIndex = Array.from(growthPhotos).findIndex(img => img.src.includes("DSC02398.webp"));
     const sequence = [];
-    for (let c = 0; c < cycles; c++) {
-      for (let i = 0; i < totalImages; i++) sequence.push(i);
-    }
+    for (let i = 0; i < totalImages; i++) sequence.push(i);
     for (let i = 0; i <= finalIndex; i++) sequence.push(i);
 
     const playhead = { frame: 0 };
@@ -105,7 +102,7 @@ document.fonts.ready.then(() => {
 
     return gsap.to(playhead, {
       frame: sequence.length - 1,
-      duration: scaleDuration + phase7ScaleDuration,
+      duration: scaleDuration + phase7ScaleDuration / 2,
       ease: "none",
       snap: 1,
       onUpdate: updateFrame,
@@ -162,7 +159,7 @@ document.fonts.ready.then(() => {
   }, "phase64")
 
   // Phase 7: REAL rows exit left, benefit words exit right — random stagger, simultaneous start
-  tl.addLabel("phase7", "phase64+=0.6")
+  tl.addLabel("phase7", "phase64+=0.9")
 
   .to(innerRowTexts, {
     x: () => `${gsap.utils.random(-80, -140)}vw`,
