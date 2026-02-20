@@ -57,7 +57,7 @@ document.fonts.ready.then(() => {
   .to(wordGrowth, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(3)" }, "<+=0.1")
 
   // Phase 5: Stacked GROWTH — outlined rows stagger outward from center
-  .addLabel("phase5", "-=0.35");
+  .addLabel("phase5", "-=0.4");
 
   growthRows.forEach((row) => {
     const index = parseInt(row.dataset.growthRow);
@@ -109,7 +109,7 @@ document.fonts.ready.then(() => {
   })(), "<");
 
   // Phase 6a: GROWTH goes outline + outer rows exit
-  tl.addLabel("phase6", "phase5+=0.6");
+  tl.addLabel("phase6", "phase5+=0.4");
 
   // Main GROWTH inner text: solid fill → outline stroke
   tl.set(wordGrowthText, { webkitTextStroke: "2px #FF7500" }, "phase6")
