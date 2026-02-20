@@ -32,9 +32,26 @@
               <span id="word-score" class="headline-word font-title"> SCORE</span>
             </span>
             <!-- Growth photo cycler (behind text stack) -->
+            <!-- SVG filter: GSAP-animated grain -->
+            <svg width="0" height="0" style="position:absolute;">
+                <filter id="grain-filter" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" result="noise"/>
+                    <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+                    <feComponentTransfer in="grayNoise" result="dimNoise">
+                        <feFuncR type="linear" slope="0.3" intercept="0.35"/>
+                        <feFuncG type="linear" slope="0.3" intercept="0.35"/>
+                        <feFuncB type="linear" slope="0.3" intercept="0.35"/>
+                    </feComponentTransfer>
+                    <feBlend in="SourceGraphic" in2="dimNoise" mode="overlay" result="blended"/>
+                    <feComponentTransfer in="blended">
+                        <feFuncA type="linear" slope="1"/>
+                    </feComponentTransfer>
+                </filter>
+            </svg>
+
             <div id="growth-photo-cycler"
                  class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[clamp(20rem,55vw,50rem)] overflow-hidden opacity-0"
-                 style="z-index: 0; aspect-ratio: 4/3; will-change: transform, opacity;">
+                 style="z-index: 0; aspect-ratio: 4/3; will-change: transform, opacity; filter: url(#grain-filter);">
                 <img src="./src/img/growth/DSC02068.webp" alt="" class="absolute inset-0 w-full h-full object-cover opacity-0" style="will-change: opacity;">
                 <img src="./src/img/growth/P1207802.webp" alt="" class="absolute inset-0 w-full h-full object-cover opacity-0" style="will-change: opacity;">
                 <img src="./src/img/growth/P1163901.webp" alt="" class="absolute inset-0 w-full h-full object-cover opacity-0" style="will-change: opacity;">
