@@ -76,6 +76,7 @@ document.fonts.ready.then(() => {
   // Growth photo: starts during Phase 4, scales through Phase 5 into Phase 6
   // scaleDuration shared between scale tween and cycler so they always finish together
   const scaleDuration = 2.2;
+  const phase7ScaleDuration = 0.6;
   tl.to(growthPhotoCycler, { opacity: 0.5, scale: 1.4, duration: scaleDuration, ease: "power2.out" }, "phase5-=0.45")
   .add((() => {
     const totalImages = growthPhotos.length;
@@ -104,8 +105,8 @@ document.fonts.ready.then(() => {
 
     return gsap.to(playhead, {
       frame: sequence.length - 1,
-      duration: scaleDuration,
-      ease: "power2.out",
+      duration: scaleDuration + phase7ScaleDuration,
+      ease: "none",
       snap: 1,
       onUpdate: updateFrame,
     });
@@ -175,7 +176,14 @@ document.fonts.ready.then(() => {
     duration: 0.6,
     ease: "expo.in",
     stagger: { each: 0.08, from: "random" },
-  }, "phase7");
+  }, "phase7")
+
+  .to(growthPhotoCycler, {
+    scale: 2.5,
+    duration: phase7ScaleDuration,
+    ease: "power2.in",
+  }, "phase7")
+
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);
