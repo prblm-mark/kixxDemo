@@ -20,6 +20,17 @@ document.fonts.ready.then(() => {
   const wordThatsWhat      = document.getElementById("word-thats-what");
   const wordKixxClosing    = document.getElementById("word-kixx-closing");
   const wordIsAbout        = document.getElementById("word-is-about");
+  const photoGrid          = document.getElementById("photo-grid");
+  const gridCells          = document.querySelectorAll(".photo-grid-cell");
+  const gridCenterCell     = document.getElementById("grid-center-cell");
+  const heroVideo          = document.getElementById("hero-video");
+
+  // Scale that makes the cycler match the center grid cell at the current viewport
+  const cellWidth          = (window.innerWidth - 12) / 3;
+  const cellHeight         = (window.innerHeight - 12) / 3;
+  const cyclerCenterScale  = cellWidth / growthPhotoCycler.offsetWidth;
+  // Set cycler height so at cyclerCenterScale it matches the cell height exactly
+  gsap.set(growthPhotoCycler, { height: cellHeight / cyclerCenterScale });
 
   // Initial states
   gsap.set(headlineWords, { opacity: 0, scale: 5, color: "#000000" });
@@ -32,6 +43,9 @@ document.fonts.ready.then(() => {
   gsap.set([benefitFriendships, benefitProgress, benefitConfidence], { opacity: 0, x: "-2em" });
   gsap.set([wordThatsWhat, wordIsAbout], { scale: 5 });
   gsap.set(wordKixxClosing, { scale: 10, rotation: -12 });
+  gsap.set(photoGrid,  { opacity: 0 });
+  gsap.set(gridCells,  { scale: 0, opacity: 0, transformOrigin: "center center" });
+  gsap.set(heroVideo,  { scale: 0.33, opacity: 0, transformOrigin: "center center" });
 
   // Build the timeline (paused for scrubber control)
   const tl = gsap.timeline({ paused: true });
@@ -181,18 +195,29 @@ document.fonts.ready.then(() => {
     stagger: { each: 0.08, from: "random" },
   }, "phase7")
 
-  .to(growthPhotoCycler, {
-    scale: 2.5,
-    duration: phase7ScaleDuration,
-    ease: "power2.in",
-  }, "phase7")
+  // Grid reveals at Phase 7 — cycler IS the center cell, surrounding cells pop in around it
+  .set(photoGrid, { opacity: 1 }, "phase7")
+  .to(growthPhotoCycler, { scale: cyclerCenterScale, duration: 0.55, ease: "power2.inOut" }, "phase7")
+  .to(growthPhotoCycler, { opacity: 0.1, duration: 0.2, ease: "power2.in" }, "phase7+=0.75")
+  .to([gridCells[1], gridCells[3], gridCells[5], gridCells[7]], {
+    stagger: 0.06,
+    keyframes: [
+      { scale: 1, opacity: 0.5, duration: 0.25, ease: "power2.out" },
+      { opacity: 0.5, duration: 0.2 },
+      { opacity: 0.1, duration: 0.2, ease: "power2.in" },
+    ],
+  }, "phase7+=0.3")
+  .to([gridCells[0], gridCells[2], gridCells[6], gridCells[8]], {
+    stagger: 0.06,
+    keyframes: [
+      { scale: 1, opacity: 0.5, duration: 0.25, ease: "power2.out" },
+      { opacity: 0.5, duration: 0.2 },
+      { opacity: 0.1, duration: 0.2, ease: "power2.in" },
+    ],
+  }, "phase7+=0.4")
 
-
-  // Phase 8: THATS WHAT KIXX IS ABOUT closing screen
-  tl.addLabel("phase8", "phase7+=0.4")
-
-    // Fade out photo cycler
-    .to(growthPhotoCycler, { opacity: 0.25, duration: 0.5, ease: "power2.in" }, "phase8")
+  // Phase 8: THATS WHAT KIXX IS ABOUT closing screen (over the settled grid)
+  tl.addLabel("phase8", "phase7+=0.8")
 
     // THATS WHAT crashes in
     .to(wordThatsWhat, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, "phase8+=0.05")
@@ -208,6 +233,25 @@ document.fonts.ready.then(() => {
     .to(wordKixxClosing, { opacity: 0, duration: 0.4, ease: "power2.in" }, "phase8exit")
     .to(wordThatsWhat, { y: "-120%", opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05")
     .to(wordIsAbout, { y: "120%", opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05");
+
+  // Phase 9 exit: grid collapses, video expands
+  tl.addLabel("phase9exit", "phase8exit+=1.0")
+
+    // Pre-roll video 0.8s before expand
+    .call(() => { heroVideo.play().catch(() => {}); }, null, "phase8exit-=0.2")
+
+    // All cells collapse + cycler fades simultaneously
+    .to(gridCells, {
+      opacity: 0, scale: 0.9, duration: 0.5, ease: "power2.in",
+      stagger: { each: 0.03, from: "center" },
+    }, "phase9exit")
+    .to(growthPhotoCycler, { opacity: 0, duration: 0.4, ease: "power2.in" }, "phase9exit")
+
+    // Video expands from center-cell size (scale 0.33) to full screen
+    .to(heroVideo, { scale: 1, opacity: 1, duration: 0.7, ease: "power2.inOut" }, "phase9exit+=0.1")
+
+    // Cleanup
+    .set(photoGrid, { display: "none" }, "phase9exit+=0.6");
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);

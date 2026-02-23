@@ -65,3 +65,12 @@
   white-space: nowrap;
   opacity: 0; /* GSAP reveals */
 }
+
+.photo-grid-cell {
+  position: relative;
+}
+
+#hero-video {
+  transform-origin: center center;
+  will-change: transform, opacity;
+}

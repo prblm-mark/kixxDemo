@@ -16,6 +16,21 @@
         <!-- Black wipe panel -->
         <div id="wipe-panel" class="absolute inset-0 bg-black origin-left scale-x-0"></div>
 
+        <!-- Phase 9: 3×3 photo grid (behind h1 and phase8 by DOM order) -->
+        <div id="photo-grid"
+             class="absolute inset-0"
+             style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 6px; pointer-events: none;">
+          <div class="photo-grid-cell overflow-hidden"><img src="./src/img/growth/DSC02068.webp" alt="" class="w-full h-full object-cover" style="filter: url(#grain-filter);"></div>
+          <div class="photo-grid-cell overflow-hidden"><img src="./src/img/growth/P1207802.webp" alt="" class="w-full h-full object-cover" style="filter: url(#grain-filter);"></div>
+          <div class="photo-grid-cell overflow-hidden"><img src="./src/img/growth/P1163901.webp" alt="" class="w-full h-full object-cover" style="filter: url(#grain-filter);"></div>
+          <div class="photo-grid-cell overflow-hidden"><img src="./src/img/growth/P1904113.webp" alt="" class="w-full h-full object-cover" style="filter: url(#grain-filter);"></div>
+          <div class="photo-grid-cell overflow-hidden" id="grid-center-cell"></div>
+          <div class="photo-grid-cell overflow-hidden"><img src="./src/img/growth/P1904221.webp" alt="" class="w-full h-full object-cover" style="filter: url(#grain-filter);"></div>
+          <div class="photo-grid-cell overflow-hidden"><img src="./src/img/growth/P1163963.webp" alt="" class="w-full h-full object-cover" style="filter: url(#grain-filter);"></div>
+          <div class="photo-grid-cell overflow-hidden"><img src="./src/img/growth/P1174156.webp" alt="" class="w-full h-full object-cover" style="filter: url(#grain-filter);"></div>
+          <div class="photo-grid-cell overflow-hidden"><img src="./src/img/growth/DSC02068.webp" alt="" class="w-full h-full object-cover" style="filter: url(#grain-filter);"></div>
+        </div>
+
         <!-- Headline -->
         <h1 class="relative text-center px-4">
             <!-- Line 1: IT'S  NOT  ABOUT -->
@@ -51,7 +66,7 @@
 
             <div id="growth-photo-cycler"
                  class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[clamp(20rem,55vw,50rem)] overflow-hidden opacity-0"
-                 style="z-index: 0; aspect-ratio: 4/3; will-change: transform, opacity; filter: url(#grain-filter);">
+                 style="z-index: 0; will-change: transform, opacity; filter: url(#grain-filter);">
                 <img src="./src/img/growth/DSC02068.webp" alt="" class="absolute inset-0 w-full h-full object-cover opacity-0" style="will-change: opacity;">
                 <img src="./src/img/growth/P1207802.webp" alt="" class="absolute inset-0 w-full h-full object-cover opacity-0" style="will-change: opacity;">
                 <img src="./src/img/growth/P1163901.webp" alt="" class="absolute inset-0 w-full h-full object-cover opacity-0" style="will-change: opacity;">
@@ -76,6 +91,14 @@
           <span id="word-kixx-closing" class="font-display text-white absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">KIXX</span>
           <span id="word-is-about" class="headline-word font-title" style="mix-blend-mode: normal;">IS ABOUT</span>
         </div>
+
+        <!-- Phase 9: Hero video takeover -->
+        <video id="hero-video"
+               src="./src/media/kixx-hero.mp4"
+               muted playsinline loop
+               class="absolute object-cover"
+               style="z-index: 30; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none;">
+        </video>
     </section>
     <!-- GSAP Core -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
