@@ -49,7 +49,7 @@ document.fonts.ready.then(() => {
   gsap.set(wordKixxClosing, { scale: 10, rotation: -12 });
   gsap.set(photoGrid,  { opacity: 0, scale: photoGridScale, transformOrigin: "center center" });
   gsap.set(gridCells,  { scale: 0, opacity: 0, transformOrigin: "center center" });
-  gsap.set(heroVideo,  { scale: 0.33, opacity: 0, transformOrigin: "center center" });
+  gsap.set(heroVideo,  { scale: photoGridScale / 3, opacity: 0, transformOrigin: "center center" });
 
   // Build the timeline (paused for scrubber control)
   const tl = gsap.timeline({ paused: true });
@@ -214,8 +214,19 @@ document.fonts.ready.then(() => {
     ],
   }, "phase7-=0.1")
 
-  // Phase 8: THATS WHAT KIXX IS ABOUT closing screen (over the settled grid)
-  tl.addLabel("phase8", "phase7+=0.5")
+  // Phase 7 → video: cycler cross-fades to video, grid collapses, video expands to full screen
+  .call(() => { heroVideo.play().catch(() => {}); }, null, "phase7-=0.3")
+  .to(growthPhotoCycler, { opacity: 0, duration: 0.35, ease: "power2.in" }, "phase7")
+  .to(heroVideo, { opacity: 1, duration: 0.35, ease: "power2.in" }, "phase7")
+  .to(gridCells, {
+    opacity: 0, scale: 0.9, duration: 0.4, ease: "power2.in",
+    stagger: { each: 0.03, from: "center" },
+  }, "phase7+=0.1")
+  .to(heroVideo, { scale: 1, duration: 1.0, ease: "power2.inOut" }, "phase7+=0.1")
+  .set(photoGrid, { display: "none" }, "phase7+=0.6")
+
+  // Phase 8: THATS WHAT KIXX IS ABOUT — plays over the full-screen video
+  tl.addLabel("phase8", "phase7+=1.0")
 
     // THATS WHAT crashes in
     .to(wordThatsWhat, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, "phase8+=0.05")
@@ -232,24 +243,6 @@ document.fonts.ready.then(() => {
     .to(wordThatsWhat, { y: "-120%", opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05")
     .to(wordIsAbout, { y: "120%", opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05");
 
-  // Phase 9 exit: grid collapses, video expands
-  tl.addLabel("phase9exit", "phase8exit+=1.0")
-
-    // Pre-roll video 0.8s before expand
-    .call(() => { heroVideo.play().catch(() => {}); }, null, "phase8exit-=0.2")
-
-    // All cells collapse + cycler fades simultaneously
-    .to(gridCells, {
-      opacity: 0, scale: 0.9, duration: 0.5, ease: "power2.in",
-      stagger: { each: 0.03, from: "center" },
-    }, "phase9exit")
-    .to(growthPhotoCycler, { opacity: 0, duration: 0.4, ease: "power2.in" }, "phase9exit")
-
-    // Video expands from center-cell size (scale 0.33) to full screen
-    .to(heroVideo, { scale: 1, opacity: 1, duration: 0.7, ease: "power2.inOut" }, "phase9exit+=0.1")
-
-    // Cleanup
-    .set(photoGrid, { display: "none" }, "phase9exit+=0.6");
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);

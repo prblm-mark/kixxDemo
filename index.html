@@ -19,7 +19,7 @@
         <!-- Phase 9: 3×3 photo grid (behind h1 and phase8 by DOM order) -->
         <div id="photo-grid"
              class="absolute inset-0"
-             style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 6px; pointer-events: none;">
+             style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); pointer-events: none;">
           <div class="photo-grid-cell overflow-hidden"><img src="./src/img/growth/DSC02068.webp" alt="" class="w-full h-full object-cover" style="filter: url(#grain-filter);"></div>
           <div class="photo-grid-cell overflow-hidden"><img src="./src/img/growth/P1207802.webp" alt="" class="w-full h-full object-cover" style="filter: url(#grain-filter);"></div>
           <div class="photo-grid-cell overflow-hidden"><img src="./src/img/growth/P1163901.webp" alt="" class="w-full h-full object-cover" style="filter: url(#grain-filter);"></div>
@@ -86,7 +86,7 @@
         </h1>
 
         <!-- Phase 8: THATS WHAT KIXX IS ABOUT -->
-        <div id="phase8" class="absolute inset-0 flex flex-col items-center justify-center" style="pointer-events: none;">
+        <div id="phase8" class="absolute inset-0 flex flex-col items-center justify-center" style="pointer-events: none; z-index: 40;">
           <span id="word-thats-what" class="headline-word font-title" style="mix-blend-mode: normal;">THATS WHAT</span>
           <span id="word-kixx-closing" class="font-display text-white absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">KIXX</span>
           <span id="word-is-about" class="headline-word font-title" style="mix-blend-mode: normal;">IS ABOUT</span>
