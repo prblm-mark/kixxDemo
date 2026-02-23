@@ -32,6 +32,10 @@ document.fonts.ready.then(() => {
   const cellHeight = (window.innerHeight - 12) / 3;
   gsap.set(growthPhotoCycler, { height: growthPhotoCycler.offsetWidth * cellHeight / cellWidth });
 
+  // Scale the grid container so its center cell (1/3 of viewport) matches
+  // the cycler's visual footprint at scale 1.4
+  const photoGridScale = (growthPhotoCycler.offsetWidth * 1.4) / (window.innerWidth / 3);
+
   // Initial states
   gsap.set(headlineWords, { opacity: 0, scale: 5, color: "#000000" });
   gsap.set(textNot, { opacity: 0, scale: 0.5 });
@@ -43,7 +47,7 @@ document.fonts.ready.then(() => {
   gsap.set([benefitFriendships, benefitProgress, benefitConfidence], { opacity: 0, x: "-2em" });
   gsap.set([wordThatsWhat, wordIsAbout], { scale: 5 });
   gsap.set(wordKixxClosing, { scale: 10, rotation: -12 });
-  gsap.set(photoGrid,  { opacity: 0 });
+  gsap.set(photoGrid,  { opacity: 0, scale: photoGridScale, transformOrigin: "center center" });
   gsap.set(gridCells,  { scale: 0, opacity: 0, transformOrigin: "center center" });
   gsap.set(heroVideo,  { scale: 0.33, opacity: 0, transformOrigin: "center center" });
 
