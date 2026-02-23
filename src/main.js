@@ -25,12 +25,12 @@ document.fonts.ready.then(() => {
   const gridCenterCell     = document.getElementById("grid-center-cell");
   const heroVideo          = document.getElementById("hero-video");
 
-  // Scale that makes the cycler match the center grid cell at the current viewport
-  const cellWidth          = (window.innerWidth - 12) / 3;
-  const cellHeight         = (window.innerHeight - 12) / 3;
-  const cyclerCenterScale  = cellWidth / growthPhotoCycler.offsetWidth;
-  // Set cycler height so at cyclerCenterScale it matches the cell height exactly
-  gsap.set(growthPhotoCycler, { height: cellHeight / cyclerCenterScale });
+
+  // Give cycler an explicit height matching the grid cell aspect ratio
+  // Children are all absolute so it has no intrinsic height
+  const cellWidth  = (window.innerWidth - 12) / 3;
+  const cellHeight = (window.innerHeight - 12) / 3;
+  gsap.set(growthPhotoCycler, { height: growthPhotoCycler.offsetWidth * cellHeight / cellWidth });
 
   // Initial states
   gsap.set(headlineWords, { opacity: 0, scale: 5, color: "#000000" });
@@ -95,8 +95,7 @@ document.fonts.ready.then(() => {
 
   // Growth photo: starts during Phase 4, scales through Phase 5 into Phase 6
   // scaleDuration shared between scale tween and cycler so they always finish together
-  const scaleDuration = 2.2;
-  const phase7ScaleDuration = 0.6;
+  const scaleDuration = 1.35;
   tl.to(growthPhotoCycler, { opacity: 0.5, scale: 1.4, duration: scaleDuration, ease: "power2.out" }, "phase5-=0.45")
   .add((() => {
     const totalImages = growthPhotos.length;
@@ -122,7 +121,7 @@ document.fonts.ready.then(() => {
 
     return gsap.to(playhead, {
       frame: sequence.length - 1,
-      duration: scaleDuration + phase7ScaleDuration / 2,
+      duration: scaleDuration,
       ease: "none",
       snap: 1,
       onUpdate: updateFrame,
@@ -195,24 +194,24 @@ document.fonts.ready.then(() => {
     stagger: { each: 0.08, from: "random" },
   }, "phase7")
 
-  // Grid reveals at Phase 7 — cycler IS the center cell, surrounding cells pop in around it
-  .set(photoGrid, { opacity: 1 }, "phase7")
-  .to(growthPhotoCycler, { scale: cyclerCenterScale, duration: 0.55, ease: "power2.inOut" }, "phase7")
+  // Grid reveals just before Phase 7 — cycler IS the center cell, surrounding cells pop in around it
+  .set(photoGrid, { opacity: 1 }, "phase7-=0.5")
+
   .to([gridCells[1], gridCells[3], gridCells[5], gridCells[7]], {
     stagger: 0.06,
     keyframes: [
       { scale: 1, opacity: 0.5, duration: 0.25, ease: "power2.out" },
     ],
-  }, "phase7+=0.3")
+  }, "phase7-=0.2")
   .to([gridCells[0], gridCells[2], gridCells[6], gridCells[8]], {
     stagger: 0.06,
     keyframes: [
       { scale: 1, opacity: 0.5, duration: 0.25, ease: "power2.out" },
     ],
-  }, "phase7+=0.4")
+  }, "phase7-=0.1")
 
   // Phase 8: THATS WHAT KIXX IS ABOUT closing screen (over the settled grid)
-  tl.addLabel("phase8", "phase7+=0.8")
+  tl.addLabel("phase8", "phase7+=0.5")
 
     // THATS WHAT crashes in
     .to(wordThatsWhat, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, "phase8+=0.05")
