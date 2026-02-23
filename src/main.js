@@ -198,21 +198,16 @@ document.fonts.ready.then(() => {
   // Grid reveals at Phase 7 — cycler IS the center cell, surrounding cells pop in around it
   .set(photoGrid, { opacity: 1 }, "phase7")
   .to(growthPhotoCycler, { scale: cyclerCenterScale, duration: 0.55, ease: "power2.inOut" }, "phase7")
-  .to(growthPhotoCycler, { opacity: 0.2, duration: 0.2, ease: "power2.in" }, "phase7+=0.9")
   .to([gridCells[1], gridCells[3], gridCells[5], gridCells[7]], {
     stagger: 0.06,
     keyframes: [
       { scale: 1, opacity: 0.5, duration: 0.25, ease: "power2.out" },
-      { opacity: 0.5, duration: 0.35 },
-      { opacity: 0.2, duration: 0.2, ease: "power2.in" },
     ],
   }, "phase7+=0.3")
   .to([gridCells[0], gridCells[2], gridCells[6], gridCells[8]], {
     stagger: 0.06,
     keyframes: [
       { scale: 1, opacity: 0.5, duration: 0.25, ease: "power2.out" },
-      { opacity: 0.5, duration: 0.35 },
-      { opacity: 0.2, duration: 0.2, ease: "power2.in" },
     ],
   }, "phase7+=0.4")
 
