@@ -75,7 +75,8 @@ document.fonts.ready.then(() => {
   // Phase 2: IT'S and ABOUT spread apart while NOT fades in and scales up
   .to(wordIts, { x: "-0.4em", duration: 0.6, ease: "expo.out" }, "+=0.1")
   .to(wordAbout, { x: "0.4em", duration: 0.6, ease: "expo.out" }, "<")
-  .to(textNot, { opacity: 1, scale: 1, x: "-0.25em", rotation: -12, duration: 0.6, zIndex: 1, ease: "expo.out" }, "<")
+  .set(textNot, { zIndex: 1 }, "<")
+  .to(textNot, { opacity: 1, scale: 1, x: "-0.25em", rotation: -12, duration: 0.6, ease: "expo.out" }, "<")
 
   // Phase 3: Black wipe with text color inversion
   .to(wipePanel, { scaleX: 1, duration: 0.6, ease: "power2.inOut" }, "-=0.25")

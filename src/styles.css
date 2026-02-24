@@ -90,6 +90,13 @@
   will-change: transform, opacity;
 }
 
+#video-overlay {
+  z-index: 31;
+  background: linear-gradient(rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.85) 100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Phase 9 nav icons */
 .p9-nav-icon {
   @apply flex items-center justify-center cursor-pointer;
