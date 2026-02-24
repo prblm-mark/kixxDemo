@@ -91,6 +91,94 @@
                class="absolute object-cover"
                style="z-index: 30; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none;">
         </video>
+
+        <!-- Phase 9: CTA Layout -->
+        <div id="phase9-cta" class="absolute inset-0" style="z-index: 50; pointer-events: none;">
+
+          <!-- Left nav sidebar -->
+          <nav id="p9-nav" class="absolute top-0 left-0 h-full w-[72px] bg-black flex flex-col items-center pt-4 gap-6">
+            <div class="w-12 h-12 bg-[#FF7500] flex items-center justify-center shrink-0 rounded-sm">
+              <img src="./src/img/kixx-circle.svg" alt="Kixx" class="w-8">
+            </div>
+            <!-- Hamburger -->
+            <button class="p9-nav-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" class="w-6 h-6">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </button>
+            <!-- Location -->
+            <button class="p9-nav-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                <circle cx="12" cy="9" r="2.5"/>
+              </svg>
+            </button>
+            <!-- Cart -->
+            <button class="p9-nav-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                <circle cx="9" cy="21" r="1"/>
+                <circle cx="20" cy="21" r="1"/>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+              </svg>
+            </button>
+            <!-- Chat -->
+            <button class="p9-nav-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </button>
+          </nav>
+
+          <!-- Content area (right of nav) -->
+          <div class="absolute top-0 bottom-0 left-[72px] right-0 flex flex-col justify-between py-10 px-8">
+
+            <!-- Headline (top-left of content area) -->
+            <div id="p9-headline" class="text-center mt-28">
+              <h2 id="p9-title" class="font-title text-kixx-orange leading-none text-[clamp(4rem,11vw,11rem)]">
+                BOOK THIER FIRST CLASS.
+              </h2>
+              <p id="p9-subtitle" class="relative font-display text-white text-[clamp(1.75rem,4vw,3.5rem)] -mt-[1.1em]">
+                #TEAMORANGE
+              </p>
+            </div>
+
+            <!-- Form (vertically centred in content area via flex spacer) -->
+            <div id="p9-form" class="self-center w-full max-w-[380px]">
+              <!-- Toggle tabs -->
+              <div class="flex border border-white rounded-full overflow-hidden mb-4">
+                <button class="p9-tab flex-1 py-2 text-sm" data-tab="academy">Find an Academy</button>
+                <button class="p9-tab flex-1 py-2 text-sm" data-tab="nursery">Nursery or School</button>
+              </div>
+              <!-- Inputs -->
+              <input type="text" placeholder="Postcode or Town" class="p9-input">
+              <input type="text" placeholder="Child's Age" class="p9-input">
+              <!-- CTA button -->
+              <button class="w-full bg-[#FF7500] text-white font-title py-3 rounded-full mt-2 tracking-wide text-sm">
+                FIND YOUR NEAREST KIXX
+              </button>
+              <!-- Social proof -->
+              <div class="flex items-center justify-center gap-2 mt-3 text-white text-sm opacity-80">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0">
+                  <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
+                  <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                </svg>
+                <span>Trusted by 10,000+ Families</span>
+              </div>
+            </div>
+
+            <!-- Scroll for more (bottom-right) -->
+            <div id="p9-scroll" class="self-end flex flex-col items-center gap-1 text-white text-xs tracking-widest">
+              <span>SCROLL FOR MORE</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 animate-bounce">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <polyline points="19 12 12 19 5 12"/>
+              </svg>
+            </div>
+
+          </div>
+        </div>
     </section>
     <!-- GSAP Core -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>

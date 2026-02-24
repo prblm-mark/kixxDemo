@@ -71,3 +71,26 @@
   transform-origin: center center;
   will-change: transform, opacity;
 }
+
+/* Phase 9 nav icons */
+.p9-nav-icon {
+  @apply flex items-center justify-center opacity-60 cursor-pointer transition-opacity duration-200;
+}
+.p9-nav-icon:hover { opacity: 1; }
+
+/* Phase 9 form inputs */
+.p9-input {
+  @apply block w-full bg-transparent rounded-full px-5 py-2.5 mb-3 text-sm outline-none text-white;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+.p9-input::placeholder { color: rgba(255, 255, 255, 0.5); }
+.p9-input:focus { border-color: white; }
+
+/* Phase 9 toggle tabs */
+.p9-tab {
+  @apply cursor-pointer transition-colors duration-200;
+  color: rgba(255, 255, 255, 0.7);
+}
+.p9-tab.active {
+  @apply bg-white text-black font-bold;
+}

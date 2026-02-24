@@ -22,6 +22,12 @@ document.fonts.ready.then(() => {
   const wordIsAbout        = document.getElementById("word-is-about");
   const heroVideo          = document.getElementById("hero-video");
   const videoOverlay       = document.getElementById("video-overlay");
+  const phase9Cta          = document.getElementById("phase9-cta");
+  const p9Nav              = document.getElementById("p9-nav");
+  const p9Title            = document.getElementById("p9-title");
+  const p9Subtitle         = document.getElementById("p9-subtitle");
+  const p9Form             = document.getElementById("p9-form");
+  const p9Scroll           = document.getElementById("p9-scroll");
 
 
   // Give cycler an explicit height matching the grid cell aspect ratio
@@ -45,6 +51,11 @@ document.fonts.ready.then(() => {
   gsap.set([wordThatsWhat, wordIsAbout], { scale: 5 });
   gsap.set(wordKixxClosing, { scale: 10, rotation: -12 });
   gsap.set(heroVideo,  { scale: videoStartScale, opacity: 0, transformOrigin: "center center" });
+  gsap.set(p9Nav,      { x: "-100%" });
+  gsap.set(p9Title,    { scale: 3, opacity: 0, transformOrigin: "center center" });
+  gsap.set(p9Subtitle, { y: 20, opacity: 0 });
+  gsap.set(p9Form,     { y: 30, opacity: 0 });
+  gsap.set(p9Scroll,   { opacity: 0 });
 
   // Build the timeline (paused for scrubber control)
   const tl = gsap.timeline({ paused: true });
@@ -218,6 +229,23 @@ document.fonts.ready.then(() => {
     .to(wordThatsWhat, { y: "-120%", opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05")
     .to(wordIsAbout, { y: "120%", opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05");
 
+  // Phase 9: CTA layout slides in after phase8 exits
+  tl.addLabel("phase9", "phase8exit+=0.55")
+    .to(p9Nav,      { x: "0%",  duration: 0.55, ease: "power3.out" },           "phase9")
+    .to(p9Title,    { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, "phase9+=0.15")
+    .to(p9Subtitle, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },      "phase9+=0.45")
+    .to(p9Form,     { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" },      "phase9+=0.35")
+    .to(p9Scroll,   { opacity: 1, duration: 0.4, ease: "power2.out" },            "phase9+=0.6")
+    .call(() => { phase9Cta.style.pointerEvents = "auto"; }, null, "phase9+=0.9");
+
+  // Phase 9 tab toggle
+  document.querySelectorAll(".p9-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".p9-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+    });
+  });
+  document.querySelector(".p9-tab[data-tab='academy']").classList.add("active");
 
   // Debug controls (see src/debug-controls.js)
   addDebugControls(tl);
