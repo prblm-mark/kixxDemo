@@ -20,9 +20,6 @@ document.fonts.ready.then(() => {
   const wordThatsWhat      = document.getElementById("word-thats-what");
   const wordKixxClosing    = document.getElementById("word-kixx-closing");
   const wordIsAbout        = document.getElementById("word-is-about");
-  const photoGrid          = document.getElementById("photo-grid");
-  const gridCells          = document.querySelectorAll(".photo-grid-cell");
-  const gridCenterCell     = document.getElementById("grid-center-cell");
   const heroVideo          = document.getElementById("hero-video");
   const videoOverlay       = document.getElementById("video-overlay");
 
@@ -47,8 +44,6 @@ document.fonts.ready.then(() => {
   gsap.set([benefitFriendships, benefitProgress, benefitConfidence], { opacity: 0, x: "-2em" });
   gsap.set([wordThatsWhat, wordIsAbout], { scale: 5 });
   gsap.set(wordKixxClosing, { scale: 10, rotation: -12 });
-  gsap.set(photoGrid,  { opacity: 0 });
-  gsap.set(gridCells,  { scale: 0, opacity: 0, transformOrigin: "center center" });
   gsap.set(heroVideo,  { scale: videoStartScale, opacity: 0, transformOrigin: "center center" });
 
   // Build the timeline (paused for scrubber control)
@@ -198,25 +193,12 @@ document.fonts.ready.then(() => {
     stagger: { each: 0.08, from: "random" },
   }, "phase7")
 
-  // Corner tiles fade in at phase6 — visible behind the REAL/benefit text
-  .set(photoGrid, { opacity: 1 }, "phase6")
-  .to(gridCells, {
-    scale: 1, opacity: 0.5, duration: 0.7,
-    ease: "power2.out",
-    stagger: 0.12,
-  }, "phase6")
-
-  // Phase 7 → video: cycler cross-fades to video, grid collapses, video expands to full screen
-  .call(() => { heroVideo.play().catch(() => {}); }, null, "phase7-=0.3")
-  .to(growthPhotoCycler, { opacity: 0, duration: 0.35, ease: "power2.in" }, "phase7")
-  .to(heroVideo, { opacity: 1, duration: 0.35, ease: "power2.in" }, "phase7")
-  .to(gridCells, {
-    opacity: 0, scale: 0.9, duration: 0.4, ease: "power2.in",
-    stagger: { each: 0.03, from: "center" },
-  }, "phase7+=0.1")
-  .to(heroVideo, { scale: 1, duration: 1.0, ease: "power2.inOut" }, "phase7+=0.1")
-  .to(videoOverlay, { opacity: 1, duration: 0.6, ease: "power2.out" }, "phase7+=0.1")
-  .set(photoGrid, { display: "none" }, "phase7+=0.6")
+  // Phase 7 → video: cycler cross-fades to video, video expands to full screen
+  .call(() => { heroVideo.play().catch(() => {}); }, null, "phase7-=0.6")
+  .to(growthPhotoCycler, { opacity: 0, duration: 0.2, ease: "power2.in" }, "phase7-=0.4")
+  .to(heroVideo, { opacity: 1, duration: 0.2, ease: "power2.in" }, "phase7-=0.4")
+  .to(heroVideo, { scale: 1, duration: 0.7, ease: "expo.out" }, "phase7-=0.4")
+  .to(videoOverlay, { opacity: 1, duration: 0.5, ease: "power2.out" }, "phase7-=0.4")
 
   // Phase 8: THATS WHAT KIXX IS ABOUT — punches in while video is expanding
   tl.addLabel("phase8", "phase7+=0.3")
