@@ -210,14 +210,14 @@ document.fonts.ready.then(() => {
   }, "phase7")
 
   // Phase 7 → video: cycler cross-fades to video, video expands to full screen
-  .call(() => { heroVideo.play().catch(() => {}); }, null, "phase7-=0.45")
-  .to(growthPhotoCycler, { opacity: 0, duration: 0.2, ease: "power2.in" }, "phase7-=0.25")
-  .to(heroVideo, { opacity: 1, duration: 0.2, ease: "power2.in" }, "phase7-=0.25")
-  .to(heroVideo, { scale: 1, duration: 0.7, ease: "expo.out" }, "phase7-=0.25")
-  .to(videoOverlay, { opacity: 1, duration: 0.5, ease: "power2.out" }, "phase7-=0.25")
+  .call(() => { heroVideo.play().catch(() => {}); }, null, "phase7+=0.05")
+  .to(growthPhotoCycler, { opacity: 0, duration: 0.2, ease: "power2.in" }, "phase7+=0.2")
+  .to(heroVideo, { opacity: 1, duration: 0.2, ease: "power2.in" }, "phase7+=0.2")
+  .to(heroVideo, { scale: 1, duration: 0.7, ease: "expo.out" }, "phase7+=0.2")
+  .to(videoOverlay, { opacity: 1, duration: 0.5, ease: "power2.out" }, "phase7+=0.2")
 
   // Phase 8: THATS WHAT KIXX IS ABOUT — punches in while video is expanding
-  tl.addLabel("phase8", "phase7-=0.1")
+  tl.addLabel("phase8", "phase7+=0.4")
 
     // THATS WHAT crashes in
     .to(wordThatsWhat, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, "phase8+=0.05")
