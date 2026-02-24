@@ -28,6 +28,7 @@ document.fonts.ready.then(() => {
   const p9Subtitle         = document.getElementById("p9-subtitle");
   const p9Form             = document.getElementById("p9-form");
   const p9Scroll           = document.getElementById("p9-scroll");
+  const p9Social           = document.getElementById("p9-social");
 
 
   // Give cycler an explicit height matching the grid cell aspect ratio
@@ -56,6 +57,7 @@ document.fonts.ready.then(() => {
   gsap.set(p9Subtitle, { y: 20, opacity: 0 });
   gsap.set(p9Form,     { y: 30, opacity: 0 });
   gsap.set(p9Scroll,   { opacity: 0 });
+  gsap.set(p9Social,   { y: 20, opacity: 0 });
 
   // Build the timeline (paused for scrubber control)
   const tl = gsap.timeline({ paused: true });
@@ -235,6 +237,7 @@ document.fonts.ready.then(() => {
     .to(p9Title,    { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, "phase9+=0.15")
     .to(p9Subtitle, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },      "phase9+=0.45")
     .to(p9Form,     { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" },      "phase9+=0.35")
+    .to(p9Social,   { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },       "phase9+=0.55")
     .to(p9Scroll,   { opacity: 1, duration: 0.4, ease: "power2.out" },            "phase9+=0.6")
     .call(() => { phase9Cta.style.pointerEvents = "auto"; }, null, "phase9+=0.9");
 
