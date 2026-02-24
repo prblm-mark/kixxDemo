@@ -145,27 +145,23 @@
             </div>
 
             <!-- Form (vertically centred in content area via flex spacer) -->
-            <div id="p9-form" class="self-center w-full max-w-[380px]">
+            <div id="p9-form" class="self-center w-full max-w-[520px] flex flex-col gap-[23px]">
               <!-- Toggle tabs -->
-              <div class="flex border border-white rounded-full overflow-hidden mb-4">
-                <button class="p9-tab flex-1 py-2 text-sm" data-tab="academy">Find an Academy</button>
-                <button class="p9-tab flex-1 py-2 text-sm" data-tab="nursery">Nursery or School</button>
+              <div class="flex bg-white rounded-full p-2 gap-6">
+                <button class="p9-tab flex-1 h-12 rounded-full flex items-center justify-center px-6 font-semi text-[26px] tracking-[0.52px]" data-tab="academy">Find an Academy</button>
+                <button class="p9-tab flex-1 h-12 rounded-full flex items-center justify-center px-6 font-semi text-[26px] tracking-[0.52px]" data-tab="nursery">Nursery or School</button>
               </div>
               <!-- Inputs -->
-              <input type="text" placeholder="Postcode or Town" class="p9-input">
-              <input type="text" placeholder="Child's Age" class="p9-input">
-              <!-- CTA button -->
-              <button class="w-full bg-[#FF7500] text-white font-title py-3 rounded-full mt-2 tracking-wide text-sm">
-                FIND YOUR NEAREST KIXX
-              </button>
-              <!-- Social proof -->
-              <div class="flex items-center justify-center gap-2 mt-3 text-white text-sm opacity-80">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0">
-                  <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>
-                  <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
-                </svg>
-                <span>Trusted by 10,000+ Families</span>
+              <div class="bg-white rounded-full p-2">
+                <input type="text" placeholder="Postcode or Town" class="p9-input h-12 w-full bg-transparent font-semi text-[26px] px-6 outline-none">
               </div>
+              <div class="bg-white rounded-full p-2">
+                <input type="text" placeholder="Child's Age" class="p9-input h-12 w-full bg-transparent font-semi text-[26px] px-6 outline-none">
+              </div>
+              <!-- CTA button -->
+              <button class="w-full bg-[#FF7500] text-white font-bold text-[32px] uppercase h-16 rounded-full">
+                Find your nearest Kixx
+              </button>
             </div>
 
             <!-- Scroll for more (bottom-right) -->

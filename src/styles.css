@@ -11,7 +11,23 @@
 @font-face {
   font-family: "GraphikXXXBold";
   src: url("../src/fonts/GraphikXXXBold.woff") format("woff");
-  font-weight: 100 900;
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GraphikXBold";
+  src: url("../src/fonts/GraphikXBold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GraphikXSemibold";
+  src: url("../src/fonts/Graphik-XSemibold.woff") format("woff");
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
@@ -19,6 +35,8 @@
 @theme {
   --font-display: "Atomic", sans-serif;
   --font-title: "GraphikXXXBold", sans-serif;
+  --font-bold: "GraphikXBold", sans-serif;
+  --font-semi: "GraphikXSemibold", sans-serif;
   --color-kixx-orange: #FF7500;
 }
 
@@ -80,17 +98,20 @@
 
 /* Phase 9 form inputs */
 .p9-input {
-  @apply block w-full bg-transparent rounded-full px-5 py-2.5 mb-3 text-sm outline-none text-white;
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: black;
 }
-.p9-input::placeholder { color: rgba(255, 255, 255, 0.5); }
-.p9-input:focus { border-color: white; }
+.p9-input::placeholder {
+  color: black;
+  opacity: 0.5;
+}
 
 /* Phase 9 toggle tabs */
 .p9-tab {
-  @apply cursor-pointer transition-colors duration-200;
-  color: rgba(255, 255, 255, 0.7);
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
 }
 .p9-tab.active {
-  @apply bg-white text-black font-bold;
+  background-color: black;
+  color: white;
 }
