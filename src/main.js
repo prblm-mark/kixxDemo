@@ -24,6 +24,7 @@ document.fonts.ready.then(() => {
   const gridCells          = document.querySelectorAll(".photo-grid-cell");
   const gridCenterCell     = document.getElementById("grid-center-cell");
   const heroVideo          = document.getElementById("hero-video");
+  const videoOverlay       = document.getElementById("video-overlay");
 
 
   // Give cycler an explicit height matching the grid cell aspect ratio
@@ -223,10 +224,11 @@ document.fonts.ready.then(() => {
     stagger: { each: 0.03, from: "center" },
   }, "phase7+=0.1")
   .to(heroVideo, { scale: 1, duration: 1.0, ease: "power2.inOut" }, "phase7+=0.1")
+  .to(videoOverlay, { opacity: 1, duration: 0.6, ease: "power2.out" }, "phase7+=0.1")
   .set(photoGrid, { display: "none" }, "phase7+=0.6")
 
-  // Phase 8: THATS WHAT KIXX IS ABOUT — plays over the full-screen video
-  tl.addLabel("phase8", "phase7+=1.0")
+  // Phase 8: THATS WHAT KIXX IS ABOUT — punches in while video is expanding
+  tl.addLabel("phase8", "phase7+=0.3")
 
     // THATS WHAT crashes in
     .to(wordThatsWhat, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, "phase8+=0.05")
