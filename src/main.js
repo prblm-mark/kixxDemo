@@ -214,7 +214,7 @@ document.fonts.ready.then(() => {
   .to(videoOverlay, { opacity: 1, duration: 0.5, ease: "power2.out" }, "phase7-=0.25")
 
   // Phase 8: THATS WHAT KIXX IS ABOUT — punches in while video is expanding
-  tl.addLabel("phase8", "phase7+=0.1")
+  tl.addLabel("phase8", "phase7-=0.1")
 
     // THATS WHAT crashes in
     .to(wordThatsWhat, { opacity: 1, scale: 1, duration: 0.4, ease: "expo.out" }, "phase8+=0.05")
