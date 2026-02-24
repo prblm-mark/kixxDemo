@@ -67,7 +67,9 @@
 }
 
 .photo-grid-cell {
-  position: relative;
+  position: absolute;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
 }
 
 #hero-video {

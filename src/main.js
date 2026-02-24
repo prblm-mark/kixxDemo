@@ -33,9 +33,8 @@ document.fonts.ready.then(() => {
   const cellHeight = (window.innerHeight - 12) / 3;
   gsap.set(growthPhotoCycler, { height: growthPhotoCycler.offsetWidth * cellHeight / cellWidth });
 
-  // Scale the grid container so its center cell (1/3 of viewport) matches
-  // the cycler's visual footprint at scale 1.4
-  const photoGridScale = (growthPhotoCycler.offsetWidth * 1.4) / (window.innerWidth / 3);
+  // Video starts at the same visual size as the cycler (cyclerWidth * 1.4 / viewportWidth)
+  const videoStartScale = growthPhotoCycler.offsetWidth * 1.4 / window.innerWidth;
 
   // Initial states
   gsap.set(headlineWords, { opacity: 0, scale: 5, color: "#000000" });
@@ -48,9 +47,9 @@ document.fonts.ready.then(() => {
   gsap.set([benefitFriendships, benefitProgress, benefitConfidence], { opacity: 0, x: "-2em" });
   gsap.set([wordThatsWhat, wordIsAbout], { scale: 5 });
   gsap.set(wordKixxClosing, { scale: 10, rotation: -12 });
-  gsap.set(photoGrid,  { opacity: 0, scale: photoGridScale, transformOrigin: "center center" });
+  gsap.set(photoGrid,  { opacity: 0 });
   gsap.set(gridCells,  { scale: 0, opacity: 0, transformOrigin: "center center" });
-  gsap.set(heroVideo,  { scale: photoGridScale / 3, opacity: 0, transformOrigin: "center center" });
+  gsap.set(heroVideo,  { scale: videoStartScale, opacity: 0, transformOrigin: "center center" });
 
   // Build the timeline (paused for scrubber control)
   const tl = gsap.timeline({ paused: true });
@@ -199,21 +198,13 @@ document.fonts.ready.then(() => {
     stagger: { each: 0.08, from: "random" },
   }, "phase7")
 
-  // Grid reveals just before Phase 7 — cycler IS the center cell, surrounding cells pop in around it
-  .set(photoGrid, { opacity: 1 }, "phase7-=0.5")
-
-  .to([gridCells[1], gridCells[3], gridCells[5], gridCells[7]], {
-    stagger: 0.06,
-    keyframes: [
-      { scale: 1, opacity: 0.5, duration: 0.25, ease: "power2.out" },
-    ],
-  }, "phase7-=0.2")
-  .to([gridCells[0], gridCells[2], gridCells[6], gridCells[8]], {
-    stagger: 0.06,
-    keyframes: [
-      { scale: 1, opacity: 0.5, duration: 0.25, ease: "power2.out" },
-    ],
-  }, "phase7-=0.1")
+  // Corner tiles fade in at phase6 — visible behind the REAL/benefit text
+  .set(photoGrid, { opacity: 1 }, "phase6")
+  .to(gridCells, {
+    scale: 1, opacity: 0.5, duration: 0.7,
+    ease: "power2.out",
+    stagger: 0.12,
+  }, "phase6")
 
   // Phase 7 → video: cycler cross-fades to video, grid collapses, video expands to full screen
   .call(() => { heroVideo.play().catch(() => {}); }, null, "phase7-=0.3")
