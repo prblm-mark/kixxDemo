@@ -93,8 +93,8 @@ document.fonts.ready.then(() => {
   });
 
   // Growth photo: starts during Phase 4, scales through Phase 5 into Phase 6
-  // scaleDuration shared between scale tween and cycler so they always finish together
-  const scaleDuration = 1.35;
+  const scaleDuration = 1.35;   // cycler scale-up
+  const cycleDuration = 1.7;    // image cycling — ends just before CONFIDENCE fully lands
   tl.to(growthPhotoCycler, { opacity: 0.5, scale: 1.4, duration: scaleDuration, ease: "power2.out" }, "phase5-=0.45")
   .add((() => {
     const totalImages = growthPhotos.length;
@@ -120,7 +120,7 @@ document.fonts.ready.then(() => {
 
     return gsap.to(playhead, {
       frame: sequence.length - 1,
-      duration: scaleDuration,
+      duration: cycleDuration,
       ease: "none",
       snap: 1,
       onUpdate: updateFrame,
@@ -194,11 +194,11 @@ document.fonts.ready.then(() => {
   }, "phase7")
 
   // Phase 7 → video: cycler cross-fades to video, video expands to full screen
-  .call(() => { heroVideo.play().catch(() => {}); }, null, "phase7-=0.6")
-  .to(growthPhotoCycler, { opacity: 0, duration: 0.2, ease: "power2.in" }, "phase7-=0.4")
-  .to(heroVideo, { opacity: 1, duration: 0.2, ease: "power2.in" }, "phase7-=0.4")
-  .to(heroVideo, { scale: 1, duration: 0.7, ease: "expo.out" }, "phase7-=0.4")
-  .to(videoOverlay, { opacity: 1, duration: 0.5, ease: "power2.out" }, "phase7-=0.4")
+  .call(() => { heroVideo.play().catch(() => {}); }, null, "phase7-=0.45")
+  .to(growthPhotoCycler, { opacity: 0, duration: 0.2, ease: "power2.in" }, "phase7-=0.25")
+  .to(heroVideo, { opacity: 1, duration: 0.2, ease: "power2.in" }, "phase7-=0.25")
+  .to(heroVideo, { scale: 1, duration: 0.7, ease: "expo.out" }, "phase7-=0.25")
+  .to(videoOverlay, { opacity: 1, duration: 0.5, ease: "power2.out" }, "phase7-=0.25")
 
   // Phase 8: THATS WHAT KIXX IS ABOUT — punches in while video is expanding
   tl.addLabel("phase8", "phase7+=0.3")
@@ -213,7 +213,7 @@ document.fonts.ready.then(() => {
     .to(wordKixxClosing, { opacity: 1, scale: 1, duration: 0.55, ease: "expo.out" }, "phase8+=0.22")
 
   // Phase 8 exit
-  .addLabel("phase8exit", "phase8+=1.2")
+  .addLabel("phase8exit", "phase8+=0.9")
     .to(wordKixxClosing, { opacity: 0, duration: 0.4, ease: "power2.in" }, "phase8exit")
     .to(wordThatsWhat, { y: "-120%", opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05")
     .to(wordIsAbout, { y: "120%", opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05");
