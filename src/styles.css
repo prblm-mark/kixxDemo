@@ -128,3 +128,11 @@
   background-color: black;
   color: white;
 }
+
+@keyframes loader-spin {
+  to { transform: rotate(360deg); }
+}
+
+#loader-ring {
+  animation: loader-spin 6s linear infinite;
+}

@@ -1,3 +1,5 @@
+const loadStartTime = Date.now();
+
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, TextPlugin, ScrambleTextPlugin, SplitText);
 
 document.fonts.ready.then(() => {
@@ -251,7 +253,37 @@ document.fonts.ready.then(() => {
   });
   document.querySelector(".p9-tab[data-tab='academy']").classList.add("active");
 
-  // Debug controls (see src/debug-controls.js)
-  addDebugControls(tl);
+  // Preload all assets, then fade out loader and autoplay
+  const imagePromises = Array.from(growthPhotos).map(img => new Promise(resolve => {
+    const el = new Image();
+    el.onload = resolve;
+    el.onerror = resolve;
+    el.src = img.src;
+  }));
+
+  const videoLoadPromise = new Promise(resolve => {
+    if (heroVideo.readyState >= 3) { resolve(); return; }
+    heroVideo.addEventListener('canplaythrough', resolve, { once: true });
+    heroVideo.addEventListener('error', resolve, { once: true });
+    heroVideo.preload = 'auto';
+    heroVideo.load();
+  });
+
+  const elapsed = Date.now() - loadStartTime;
+  const minDelayPromise = new Promise(resolve => setTimeout(resolve, Math.max(0, 1000 - elapsed)));
+
+  const loader = document.getElementById('loader');
+
+  Promise.all([...imagePromises, videoLoadPromise, minDelayPromise]).then(() => {
+    gsap.to(loader, {
+      opacity: 0,
+      duration: 0.6,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        loader.style.display = 'none';
+        tl.play();
+      },
+    });
+  });
 
 });
