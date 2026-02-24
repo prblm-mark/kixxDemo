@@ -92,7 +92,7 @@
 
 /* Phase 9 nav icons */
 .p9-nav-icon {
-  @apply flex items-center justify-center opacity-60 cursor-pointer transition-opacity duration-200;
+  @apply flex items-center justify-center opacity-70 cursor-pointer transition-opacity duration-200;
 }
 .p9-nav-icon:hover { opacity: 1; }
 
