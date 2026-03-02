@@ -161,6 +161,8 @@
     </div>
   </div>
 </div>
+<div id="smooth-wrapper">
+<div id="smooth-content">
 <section id="hero"
          class="relative isolate min-h-screen bg-kixx-orange flex items-center justify-center overflow-hidden">
   
@@ -242,7 +244,7 @@
   </h1>
   
   <!-- Phase 8: THATS WHAT KIXX IS ABOUT -->
-  <div id="phase8" class="absolute inset-0 flex flex-col items-center justify-center"
+  <div id="closing-statement" class="absolute inset-0 flex flex-col items-center justify-center"
        style="pointer-events: none; z-index: 40;">
     <span id="word-thats-what" class="headline-word font-title" style="mix-blend-mode: normal;">THATS WHAT</span>
     <span id="word-kixx-closing"
@@ -262,12 +264,12 @@
   </video>
   
   <!-- Phase 9: CTA Layout -->
-  <div id="phase9-cta" class="absolute inset-0" style="z-index: 50; pointer-events: none;">
+  <div id="hero-cta" class="absolute inset-0" style="z-index: 50; pointer-events: none;">
     
     <!-- Top nav bar -->
-    <nav id="p9-nav" class="absolute top-0 left-0 w-full h-[118px] bg-black" style="z-index: 10;">
+    <nav id="main-nav" class="absolute top-0 left-0 w-full h-[118px] bg-black" style="z-index: 10;">
       <!-- Menu -->
-      <button class="p9-nav-icon absolute left-[30px] top-0 h-full flex items-center gap-6">
+      <button class="nav-icon absolute left-[30px] top-0 h-full flex items-center gap-6">
         <svg class="w-[56px] h-[46px]" viewBox="0 0 56 46" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M56 46H0V38H56V46ZM56 27H0V19H56V27ZM56 8H0V0H56V8Z" fill="white"/>
         </svg>
@@ -287,7 +289,7 @@
             fill="#FF7500"/>
       </svg>
       <!-- Find your Kixx -->
-      <button class="p9-nav-icon absolute right-[30px] top-0 h-full flex items-center gap-4">
+      <button class="nav-icon absolute right-[30px] top-0 h-full flex items-center gap-4">
         <svg class="w-[64px] h-[64px]" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
               d="M14.2593 9.25922C23.9383 -0.419714 39.7404 -0.419769 49.4194 9.25922C59.0985 18.9382 59.0984 34.7403 49.4194 44.4194L31.8394 62.0004L14.2593 44.4194C4.58025 34.7403 4.58023 18.9383 14.2593 9.25922ZM43.395 15.2836C36.9753 8.86392 26.6047 8.96274 20.2837 15.2836C13.8639 21.7034 13.8639 31.9752 20.2837 38.395C26.7035 44.8147 37.074 44.716 43.395 38.395C49.8147 31.9752 49.716 21.6046 43.395 15.2836ZM25.1235 20.1235C28.7778 16.4692 34.7034 16.4692 38.4565 20.2221C42.1109 23.8765 42.1109 29.8022 38.4565 33.4565C34.8022 37.1107 28.8765 37.1108 25.2222 33.4565C21.5681 29.8022 21.4694 23.7778 25.1235 20.1235Z"
@@ -304,37 +306,37 @@
       <div class="flex-1 flex flex-col items-center justify-center">
         
         <!-- Headline -->
-        <div id="p9-headline" class="text-center w-full">
-          <h2 id="p9-title" class="font-title text-kixx-orange leading-none text-[clamp(4rem,11vw,11rem)]">
+        <div id="cta-headline" class="text-center w-full">
+          <h2 id="cta-title" class="font-title text-kixx-orange leading-none text-[clamp(4rem,11vw,11rem)]">
             BOOK THIER FIRST CLASS.
           </h2>
-          <p id="p9-subtitle" class="relative font-display text-white text-[clamp(1.75rem,4vw,3.5rem)] -mt-[1.1em]">
+          <p id="cta-subtitle" class="relative font-display text-white text-[clamp(1.75rem,4vw,3.5rem)] -mt-[1.1em]">
             #TEAMORANGE
           </p>
         </div>
         
         <!-- Form + social proof -->
         <div class="flex flex-col items-center mt-14 w-full">
-          <div id="p9-form" class="w-full max-w-[520px] flex flex-col gap-[23px]">
+          <div id="booking-form" class="w-full max-w-[520px] flex flex-col gap-[23px]">
             <!-- Toggle tabs -->
             <div class="flex bg-white rounded-full p-2 gap-6">
               <button
-                  class="p9-tab flex-1 h-12 rounded-full flex items-center justify-center px-6 font-semi text-[26px] tracking-[0.52px]"
+                  class="form-tab flex-1 h-12 rounded-full flex items-center justify-center px-6 font-semi text-[26px] tracking-[0.52px]"
                   data-tab="academy">Find an Academy
               </button>
               <button
-                  class="p9-tab flex-1 h-12 rounded-full flex items-center justify-center px-6 font-semi text-[26px] tracking-[0.52px]"
+                  class="form-tab flex-1 h-12 rounded-full flex items-center justify-center px-6 font-semi text-[26px] tracking-[0.52px]"
                   data-tab="nursery">Nursery or School
               </button>
             </div>
             <!-- Inputs -->
             <div class="bg-white rounded-full p-2">
               <input type="text" placeholder="Postcode or Town"
-                     class="p9-input h-12 w-full bg-transparent font-semi text-[26px] px-6 outline-none">
+                     class="form-input h-12 w-full bg-transparent font-semi text-[26px] px-6 outline-none">
             </div>
             <div class="bg-white rounded-full p-2">
               <input type="text" placeholder="Child's Age"
-                     class="p9-input h-12 w-full bg-transparent font-semi text-[26px] px-6 outline-none">
+                     class="form-input h-12 w-full bg-transparent font-semi text-[26px] px-6 outline-none">
             </div>
             <!-- CTA button -->
             <button
@@ -344,7 +346,7 @@
           </div>
           
           <!-- Social proof carousel -->
-          <div id="p9-social" class="relative mt-6 h-[34px]">
+          <div id="social-proof" class="relative mt-6 h-[34px]">
             <div class="flex items-center justify-center gap-[11px] absolute inset-0 transition-opacity duration-500" data-social-item>
               <svg class="w-[24px] h-[24px] shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.137 4.99253C14.7094 2.09107 18.6091 1.4145 21.2941 3.77728C24.3225 6.44218 23.7257 11.2044 21.1533 14.1059C18.5809 17.0074 12.0004 21.6481 12.0004 21.6481L11.9993 21.6491L11.9982 21.6502V21.6481C11.9982 21.6481 5.41818 17.0074 2.84579 14.1059C0.273395 11.2044 -0.323472 6.44211 2.70497 3.77728C5.38996 1.41467 9.28936 2.09123 11.8617 4.99253C11.9084 5.04515 11.9541 5.0986 11.9991 5.15232C12.0442 5.09848 12.0902 5.04526 12.137 4.99253Z" fill="white"/>
@@ -369,7 +371,7 @@
       </div><!-- end centred wrapper -->
       
       <!-- Scroll for more (bottom-right) -->
-      <div id="p9-scroll" class="absolute bottom-4 right-8 flex flex-col items-start gap-3">
+      <div id="scroll-indicator" class="absolute bottom-4 right-8 flex flex-col items-start gap-3">
         <span class="font-display text-[30px] text-white tracking-[-0.6px] uppercase inline-block"
               style="transform: rotate(6.67deg);">scroll for more</span>
         <div class="animate-bounce">
@@ -380,6 +382,9 @@
     </div>
   </div>
 </section>
+<!-- future sections go here -->
+</div>
+</div>
 <!-- GSAP Core -->
 <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
 <!-- GSAP Plugins -->
