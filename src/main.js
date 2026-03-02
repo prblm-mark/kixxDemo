@@ -288,6 +288,10 @@ document.fonts.ready.then(() => {
     .to(scrollIndicator, { opacity: 1, duration: 0.4, ease: "power2.out" },           "phase9+=0.6")
     .call(() => { heroCta.style.pointerEvents = "auto"; }, null, "phase9+=0.9");
 
+  // ── Debug Scrubber (dev only — see src/debug-controls.js) ───────────
+
+  addDebugControls(tl);
+
   // ── Form Tab Toggle ─────────────────────────────────────────────────
 
   formTabs.forEach(tab => {
