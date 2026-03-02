@@ -54,7 +54,7 @@ document.fonts.ready.then(() => {
   gsap.set([wordThatsWhat, wordIsAbout], { scale: 5 });
   gsap.set(wordKixxClosing, { scale: 10, rotation: -12 });
   gsap.set(heroVideo,  { scale: videoStartScale, opacity: 0, transformOrigin: "center center" });
-  gsap.set(p9Nav,      { x: "-100%" });
+  gsap.set(p9Nav,      { y: "-100%" });
   gsap.set(p9Title,    { scale: 3, opacity: 0, transformOrigin: "center center" });
   gsap.set(p9Subtitle, { y: 20, opacity: 0 });
   gsap.set(p9Form,     { y: 30, opacity: 0 });
@@ -236,7 +236,7 @@ document.fonts.ready.then(() => {
 
   // Phase 9: CTA layout slides in after phase8 exits
   tl.addLabel("phase9", "phase8exit+=0.55")
-    .to(p9Nav,      { x: "0%",  duration: 0.55, ease: "power3.out" },           "phase9")
+    .to(p9Nav,      { y: "0%",  duration: 0.55, ease: "power3.out" },           "phase9")
     .to(p9Title,    { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, "phase9+=0.15")
     .to(p9Subtitle, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },      "phase9+=0.45")
     .to(p9Form,     { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" },      "phase9+=0.35")

@@ -40,6 +40,13 @@
   --color-kixx-orange: #FF7500;
 }
 
+/* Antialiased rendering for body/UI text */
+.font-bold,
+.font-semi {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .headline-word {
   display: inline-block;
   font-size: clamp(5rem, 15vw, 14rem);
@@ -107,6 +114,12 @@
 }
 .p9-nav-icon:hover svg * {
   fill: #FF7500;
+}
+.p9-nav-icon span {
+  transition: color 0.2s;
+}
+.p9-nav-icon:hover span {
+  color: #FF7500;
 }
 
 /* Phase 9 form inputs */
