@@ -52,8 +52,9 @@
 
 :root {
     --clamp-headline: clamp(6.25rem, 2.5rem + 16.6667vw, 17.5rem);
-    --clamp-sub-headline: clamp(5rem, 2.5rem + 11.1111vw, 12.5rem);
+    --clamp-headline-sm: clamp(5rem, 2.5rem + 11.1111vw, 12rem);
     --clamp-display: clamp(5rem, 2.0833rem + 12.963vw, 13.75rem);
+    --clamp-display-sm: clamp(2rem, 1.3333rem + 2.963vw, 4rem);
 }
 
 
