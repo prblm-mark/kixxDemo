@@ -278,7 +278,7 @@
             "ALL_SCOPES"
           ],
           "com.figma.codeSyntax": {
-            "WEB": "--fluid-headline"
+            "WEB": "--clamp-headline"
           },
           "com.figma.isOverride": true
         }

@@ -1,183 +1,195 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 /* ── Custom Fonts ────────────────────────────────────────────────────── */
 
 @font-face {
-  font-family: "Atomic";
-  src: url("../src/fonts/Atomic.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: "Atomic";
+    src: url("../src/fonts/Atomic.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: "GraphikXXXBold";
-  src: url("../src/fonts/GraphikXXXBold.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: "GraphikXXXBold";
+    src: url("../src/fonts/GraphikXXXBold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: "GraphikXBold";
-  src: url("../src/fonts/GraphikXBold.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: "GraphikXBold";
+    src: url("../src/fonts/GraphikXBold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: "GraphikXSemibold";
-  src: url("../src/fonts/Graphik-XSemibold.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: "GraphikXSemibold";
+    src: url("../src/fonts/Graphik-XSemibold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 /* ── Tailwind v4 Theme Tokens ────────────────────────────────────────── */
 
 @theme {
-  --font-display: "Atomic", sans-serif;
-  --font-title: "GraphikXXXBold", sans-serif;
-  --font-bold: "GraphikXBold", sans-serif;
-  --font-semi: "GraphikXSemibold", sans-serif;
-  --color-kixx-orange: #FF7500;
-  --color-kixx-white: #FFFFFF;
-  --color-kixx-black: #000000;
+    --font-display: "Atomic", sans-serif;
+    --font-title: "GraphikXXXBold", sans-serif;
+    --font-bold: "GraphikXBold", sans-serif;
+    --font-semi: "GraphikXSemibold", sans-serif;
+    --font-body: "Plus Jakarta Sans", sans-serif;
+    --color-kixx-orange: #FF7500;
+    --color-kixx-white: #FFFFFF;
+    --color-kixx-black: #000000;
 }
+
+/* ── Root  ───────────────────────────────────────────────────────────── */
+
+:root {
+    --clamp-headline: clamp(6.25rem, 2.5rem + 16.6667vw, 17.5rem);
+    --clamp-display: clamp(5rem, 2.0833rem + 12.963vw, 13.75rem);
+}
+
 
 /* ── Typography ──────────────────────────────────────────────────────── */
 
 /* Sharper rendering for bold UI text on macOS */
 .font-bold,
 .font-semi {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* ── Headline Animation Elements ─────────────────────────────────────── */
 
 /* Base class for IT'S, ABOUT, THE, SCORE — orange fill, GSAP reveals */
 .headline-word {
-  display: inline-block;
-  font-size: clamp(5rem, 15vw, 14rem);
-  line-height: 0.9;
-  color: var(--color-kixx-orange);
-  opacity: 0;
+    display: inline-block;
+    font-size: var(--clamp-headline);
+    line-height: 0.9;
+    color: var(--color-kixx-orange);
+    opacity: 0;
 }
 
 /* Stacked GROWTH rows — transparent fill with orange stroke */
 .growth-outline {
-  display: inline-block;
-  font-size: clamp(5rem, 15vw, 14rem);
-  line-height: 0.9;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--color-kixx-orange);
-  opacity: 0;
+    display: inline-block;
+    font-size: var(--clamp-headline);
+    line-height: 0.9;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--color-kixx-orange);
+    opacity: 0;
 }
 
 /* FRIENDSHIPS / PROGRESS / CONFIDENCE — anchored right of each REAL row */
 .benefit-word {
-  position: absolute;
-  left: 100%;
-  top: 0;
-  white-space: nowrap;
-  font-size: clamp(5rem, 15vw, 14rem);
-  line-height: 0.9;
-  color: var(--color-kixx-orange);
-  -webkit-text-stroke-width: 0;
-  opacity: 0;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    white-space: nowrap;
+    font-size: var(--clamp-headline);
+    line-height: 0.9;
+    color: var(--color-kixx-orange);
+    -webkit-text-stroke-width: 0;
+    opacity: 0;
 }
 
 /* NOT text — white, no blend mode, independent of the black wipe */
 #text-not {
-  font-size: clamp(4.5rem, 12vw, 11rem);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  opacity: 0;
+    font-size: var(--clamp-display);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    opacity: 0;
 }
 
 /* Closing KIXX wordmark in Phase 8 */
 #word-kixx-closing {
-  font-size: clamp(4.5rem, 12vw, 11rem);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  opacity: 0;
+    font-size: var(--clamp-display);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    opacity: 0;
 }
 
 /* ── Video ───────────────────────────────────────────────────────────── */
 
 /* Hint to compositor — this element is continuously transformed by GSAP */
 #hero-video {
-  transform-origin: center center;
-  will-change: transform, opacity;
+    transform-origin: center center;
+    will-change: transform, opacity;
 }
 
 /* Dark gradient overlay for text legibility over the video */
 #video-overlay {
-  z-index: 31;
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.4)  0%,
-    rgba(0, 0, 0, 0.55) 50%,
-    rgba(0, 0, 0, 0.85) 100%
-  );
-  opacity: 0;
-  pointer-events: none;
+    z-index: 31;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.4) 0%,
+            rgba(0, 0, 0, 0.55) 50%,
+            rgba(0, 0, 0, 0.85) 100%
+    );
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* ── Navigation Icons ────────────────────────────────────────────────── */
 
 .nav-icon {
-  @apply flex items-center justify-center cursor-pointer;
+    @apply flex items-center justify-center cursor-pointer;
 }
 
 .nav-icon svg * {
-  fill: white;
-  transition: fill 0.2s;
+    fill: white;
+    transition: fill 0.2s;
 }
 
 .nav-icon:hover svg * {
-  fill: var(--color-kixx-orange);
+    fill: var(--color-kixx-orange);
 }
 
 .nav-icon span {
-  transition: color 0.2s;
+    transition: color 0.2s;
 }
 
 .nav-icon:hover span {
-  color: var(--color-kixx-orange);
+    color: var(--color-kixx-orange);
 }
 
 /* ── Booking Form ────────────────────────────────────────────────────── */
 
 .form-input {
-  color: var(--color-kixx-black);
+    color: var(--color-kixx-black);
 }
 
 .form-input::placeholder {
-  color: var(--color-kixx-black);
-  opacity: 0.5;
+    color: var(--color-kixx-black);
+    opacity: 0.5;
 }
 
 /* Academy / Birthday toggle tabs */
 .form-tab {
-  color: var(--color-kixx-black);
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+    color: var(--color-kixx-black);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .form-tab.active {
-  background-color: var(--color-kixx-black);
-  color: var(--color-kixx-white);
+    background-color: var(--color-kixx-black);
+    color: var(--color-kixx-white);
 }
 
 /* ── Loader ──────────────────────────────────────────────────────────── */
 
 @keyframes loader-spin {
-  to { transform: rotate(-360deg); }
+    to {
+        transform: rotate(-360deg);
+    }
 }
 
 #loader-ring {
-  animation: loader-spin 6s linear infinite;
+    animation: loader-spin 6s linear infinite;
 }

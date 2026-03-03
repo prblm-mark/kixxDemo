@@ -66,6 +66,8 @@ For every component marked as existing, run a quick audit:
    - CSS classes with no Figma counterpart (spurious — candidate for removal)
    - Token gaps (design values with no semantic token — apply the same stop rule as
      `/build-component` Step 5)
+   - Font-size using a fixed value (`px` or `rem`) where the Figma token's `codeSyntax.WEB`
+     starts with `--clamp-` — should be `var(--clamp-*)` instead. Flag as `Outdated`.
 
 **Flag contextual overrides before marking status.** If a child component instance within the
 parent has a property set differently from the child's base design, STOP and report it to the

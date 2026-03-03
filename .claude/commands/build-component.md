@@ -14,11 +14,24 @@ Usage: `/build-component <Figma URL or node description>`
 
 ### 1. Locate
 
-**Step 1a — Tier=Template check (before everything else):**
-Before locating the component set, check whether the target is a `Tier=Template` component
-(i.e. a full UI screen or section that composes multiple patterns, rather than an atomic or
-pattern-tier component). Signals: the Figma node is a full-screen frame, it contains Header +
-multiple patterns, the URL points to a template-level node.
+**Step 1a — Tier gate (before everything else):**
+Before locating the component set, check whether the target is a `Tier=Section` or
+`Tier=Template` frame rather than an atomic or pattern-tier component.
+
+**Tier=Section** (checked first) — a full page section that composes multiple components.
+Signals: the Figma node is tagged `Tier=Section`, it's a wide frame containing multiple
+pattern-tier children arranged as a page section.
+
+If the target is Tier=Section: **STOP immediately.**
+
+> "This is a Tier=Section frame — a full page section, not an atomic component.
+> Use `/build-section` to build it."
+
+Do not continue. The `/build-section` workflow handles sections.
+
+**Tier=Template** — a full UI screen or multi-section layout that composes multiple patterns.
+Signals: the Figma node is a full-screen frame, it contains Header + multiple patterns,
+the URL points to a template-level node.
 
 If the target is Tier=Template: **STOP before Step 1b.** Ask the user:
 
@@ -207,6 +220,12 @@ When a Figma design references a token not yet declared in `src/styles.css`:
   ```
 - **Spacing/sizing** → add to `@theme` (if Tailwind utilities needed) or `:root`
 - **Typography** → font families already in `@theme`; fixed sizes and line heights go in `:root`
+- **Clamp font-size tokens** — Figma `font/size-clamp/*` tokens (e.g. `$value: 300`) are
+  visual stand-ins only. Their `codeSyntax.WEB` names start with `--clamp-` (e.g.
+  `--clamp-headline`, `--clamp-display`). These map to `:root` variables in `src/styles.css`
+  that contain real `clamp()` expressions. **Always use `var(--clamp-headline)` etc. — never
+  the fixed pixel value from the JSON.** No breakpoint overrides needed; the clamp is
+  inherently responsive.
 
 **Token source files** (read raw JSON, no build pipeline):
 
@@ -223,7 +242,7 @@ When a Figma design references a token not yet declared in `src/styles.css`:
 |-------------|-------------------|-------------|
 | `--font-display` | `--font-display` | Atomic |
 | `--font-headline` | `--font-title` | GraphikXXXBold |
-| `--font-body` | TBD | GraphikXSemibold or system |
+| `--font-body` | `--font-body` | Plus Jakarta Sans (Google Fonts) |
 | — | `--font-bold` | GraphikXBold |
 | — | `--font-semi` | GraphikXSemibold |
 
@@ -346,7 +365,7 @@ Token names come from `com.figma.codeSyntax.WEB` in the JSON files — they use 
 | Border radius | `--radius-sm/md/lg/xl/full` | `:root` as `px` or `rem` |
 | Spacing / size | `--spacing-1` … `--spacing-13` | `:root` or `@theme` |
 | Font size (fixed) | `--font-fixed-xxs` … `--font-fixed-4xl` | `:root` as `rem` |
-| Font size (clamp) | `--fluid-headline` | Already in `:root` |
+| Font size (clamp) | `--clamp-headline`, `--clamp-display` | Already in `:root` — contains `clamp()`. Figma `$value` is a visual stand-in, ignore it. |
 | Font weight | `--font-regular/medium/semibold/bold/extrabold` | `:root` |
 | Line height | `--leading-1` … `--leading-5` | `:root` as `rem` |
 | Icon sizes | `--icon-size-sm` (16px) / `--icon-size-md` (20px) / `--icon-size-lg` (24px) | `:root` |
@@ -373,3 +392,7 @@ Full token source: `src/figmaTokens/tokens.json` and `src/figmaTokens/Typography
 - **Design context shows structure only — NOT interaction behavior.** Figma prototype interactions
   never appear in `get_design_context` output. Never remove or demote an existing interactive
   element based on design context output alone.
+- **Clamp tokens are NOT fixed sizes:** `font/size-clamp/headline` shows `$value: 300` in
+  JSON — that's a Figma canvas placeholder. The real value is `clamp(6.875rem, ... 18.75rem)`
+  in `:root`. If Figma shows a giant fixed font-size on a headline element, check whether
+  the token name starts with `--clamp-` before using the number.

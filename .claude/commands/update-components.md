@@ -85,6 +85,7 @@ Also flag any component that:
 - Uses a token whose **value** changed (not just added)
 - Uses a hardcoded hex or px value that should now map to a changed token
 - Should NOW use a newly-added token based on its Figma design
+- Uses a hardcoded font-size where a `--clamp-*` variable exists in `:root` for that role
 
 ---
 
