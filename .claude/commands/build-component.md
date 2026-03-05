@@ -243,8 +243,6 @@ When a Figma design references a token not yet declared in `src/styles.css`:
 | `--font-display` | `--font-display` | Atomic |
 | `--font-headline` | `--font-title` | GraphikXXXBold |
 | `--font-body` | `--font-body` | Plus Jakarta Sans (Google Fonts) |
-| — | `--font-bold` | GraphikXBold |
-| — | `--font-semi` | GraphikXSemibold |
 
 Rule: **always trust `@theme` definitions in `src/styles.css` over Figma JSON `$value` for font families**.
 Figma says "Jakarta Sans" for `--font-title` but the actual font loaded is GraphikXXXBold.
@@ -256,24 +254,44 @@ Figma says "Jakarta Sans" for `--font-title` but the actual font loaded is Graph
 - **Reusable components** (button, card, input): create `src/components/<Name>.css` and
   `@import` from `src/styles.css` (create the `src/components/` directory on first use)
 
-#### CSS rules
+#### CSS rules — Tailwind-first approach
 
-- BEM naming: `.component`, `.component__element`, `.component--modifier`
-- Only semantic token variables, or primitives explicitly approved by the user in Step 5
-- Approved primitives: use the hex value with a comment citing the primitive name
-  (e.g. `/* Orange/400 */`)
-- Never hardcode arbitrary hex values or named colors
-- **Dimension values (spacing, sizing, font-size, line-height, border-radius) → use `rem`
-  via token variables when available.** Border widths (`1px`, `2px`) and box-shadow pixel
-  offsets stay as `px`.
-- Base state first, then variant modifiers, then size modifiers
+**Layout, spacing, sizing, typography, colors, responsive breakpoints → Tailwind utility classes
+in the HTML.** Map each Figma token to its Tailwind equivalent:
+
+| Figma token | px | Tailwind |
+|---|---|---|
+| `--spacing-1` (4px) | 4 | `p-1`, `gap-1`, `pt-1` |
+| `--spacing-3` (8px) | 8 | `p-2`, `gap-2` |
+| `--spacing-4` (12px) | 12 | `gap-3` |
+| `--spacing-5` (16px) | 16 | `p-4`, `gap-4` |
+| `--spacing-6` (24px) | 24 | `p-6`, `px-6` |
+| `--spacing-10` (56px) | 56 | `min-h-14` |
+| `--spacing-11` (64px) | 64 | `h-16`, `min-h-16` |
+| `--font-fixed-xs` (14px) | 14 | `text-sm` |
+| `--font-fixed-sm` (16px) | 16 | `text-base` |
+| `--font-fixed-md` (18px) | 18 | `text-lg` |
+| `--font-fixed-xl` (22px) | 22 | `text-[1.375rem]` |
+| `--leading-2` (24px) | 24 | `leading-6` |
+| `--icon-size-lg` (24px) | 24 | `size-6` |
+| `--radius-full` | — | `rounded-full` |
+
+**Never create custom `--spacing-*`, `--font-fixed-*`, or `--font-*` (weight) CSS vars when
+a Tailwind utility exists.** Use `text-[1.375rem]` for arbitrary values with no exact match.
+
+**Component CSS files (`src/components/*.css`) contain ONLY stateful styles:**
+- State classes toggled by JS (`.active`, `.selected`, `.open`)
+- Pseudo-classes (`:hover`, `:active`, `:focus-visible`, `:disabled`)
+- Transitions (`transition: background-color 0.2s`)
+- Form resets (`appearance: none`, placeholder opacity)
+- BEM class names only needed when JS queries them or CSS state rules target them
+
+**Color tokens** still belong in `@theme` (e.g. `--color-surface-brand-hover`) since Tailwind
+needs them to generate utility classes. Structural colors (`--color-kixx-orange`, etc.) are
+already declared.
+
+- Never hardcode arbitrary hex values — use `@theme` color tokens or Tailwind utilities
 - Include `:hover`, `:active`, `:focus-visible`, `:disabled` pseudo-classes where applicable
-- Add `min-height` (not just padding) when Figma specifies a fixed height
-
-#### Tailwind v4 utility vs custom CSS decision
-
-- **Prefer Tailwind utilities** for: layout, spacing, colors, typography, responsive breakpoints
-- **Use custom CSS** for: multi-state styling, pseudo-elements, complex transitions, BEM blocks
 - **Never use Tailwind `animate-*`** — always GSAP or custom CSS `@keyframes`
 
 #### GSAP awareness
