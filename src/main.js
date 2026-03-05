@@ -48,7 +48,7 @@ document.fonts.ready.then(() => {
   const bookingForm        = document.getElementById("booking-form");
   const scrollIndicator    = document.getElementById("scroll-indicator");
   const socialProof        = document.getElementById("social-proof");
-  const formTabs           = document.querySelectorAll(".form-tab");
+  const formTabs           = document.querySelectorAll(".booking-form__tab");
 
   // ── ScrollSmoother ──────────────────────────────────────────────────
 
@@ -300,7 +300,7 @@ document.fonts.ready.then(() => {
       tab.classList.add("active");
     });
   });
-  document.querySelector(".form-tab[data-tab='academy']").classList.add("active");
+  document.querySelector(".booking-form__tab[data-tab='academy']")?.classList.add("active");
 
   // ── Asset Preload & Loader Fade-out ─────────────────────────────────
 

@@ -1,0 +1,210 @@
+/* ── Booking Form ────────────────────────────────────────────────────── */
+/* Figma: node 112:88, file XFte2DW31CDfG581U5cn9W                      */
+/* Variants: Device=Default (320px), Device=Desktop (640px)             */
+
+/* ── Block ── */
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-5);
+    width: 100%;
+    max-width: none;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@media (min-width: 768px) {
+    .booking-form {
+        gap: var(--spacing-6);
+        max-width: 40rem; /* 640px — Figma Desktop */
+    }
+}
+
+/* ── Toggle ── */
+
+.booking-form__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    width: 100%;
+    padding: var(--spacing-1);
+    min-height: var(--spacing-10);
+    background-color: var(--color-kixx-white);
+    border-radius: var(--radius-full);
+}
+
+@media (min-width: 768px) {
+    .booking-form__toggle {
+        padding: var(--spacing-3);
+    }
+}
+
+/* ── Tab ── */
+
+.booking-form__tab {
+    flex: 1 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem; /* 48px */
+    padding: var(--spacing-3) var(--spacing-5);
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-size: var(--font-fixed-xs);
+    font-weight: var(--font-medium);
+    line-height: normal;
+    text-align: center;
+    color: var(--color-kixx-black);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+@media (min-width: 768px) {
+    .booking-form__tab {
+        padding: var(--spacing-5);
+        font-size: var(--font-fixed-md);
+    }
+}
+
+.booking-form__tab:focus-visible {
+    outline: 2px solid var(--color-kixx-orange);
+    outline-offset: -2px;
+}
+
+.booking-form__tab.active {
+    background-color: var(--color-kixx-black);
+    color: var(--color-kixx-white);
+    font-weight: var(--font-extrabold);
+}
+
+/* ── Field (select wrapper) ── */
+
+.booking-form__field {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: var(--spacing-10);
+    padding: var(--spacing-5) var(--spacing-6);
+    background-color: var(--color-kixx-white);
+    border-radius: var(--radius-full);
+}
+
+@media (min-width: 768px) {
+    .booking-form__field {
+        min-height: var(--spacing-11);
+    }
+}
+
+/* ── Select ── */
+
+.booking-form__select {
+    flex: 1 0 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    appearance: none;
+    font-family: var(--font-body);
+    font-size: var(--font-fixed-xs);
+    font-weight: var(--font-medium);
+    line-height: normal;
+    color: var(--color-kixx-black);
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .booking-form__select {
+        font-size: var(--font-fixed-md);
+    }
+}
+
+.booking-form__select option[value=""][disabled] {
+    color: var(--color-kixx-black);
+    opacity: 0.5;
+}
+
+/* Placeholder style when no value selected (disabled option shown) */
+.booking-form__select:has(option[value=""]:checked) {
+    color: var(--color-kixx-black);
+    opacity: 0.5;
+}
+
+/* ── Icon (chevron) ── */
+
+.booking-form__icon {
+    width: var(--icon-size-lg);
+    height: var(--icon-size-lg);
+    flex-shrink: 0;
+}
+
+/* ── CTA Button ── */
+
+.booking-form__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: var(--spacing-10);
+    padding: var(--spacing-5) var(--spacing-6);
+    background-color: var(--color-kixx-orange);
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-size: var(--font-fixed-sm);
+    font-weight: var(--font-extrabold);
+    line-height: var(--leading-2);
+    text-align: center;
+    white-space: nowrap;
+    color: var(--color-kixx-white);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+@media (min-width: 768px) {
+    .booking-form__cta {
+        height: var(--spacing-11);
+        font-size: var(--font-fixed-xl);
+    }
+}
+
+.booking-form__cta:hover {
+    background-color: var(--color-surface-brand-hover);
+}
+
+.booking-form__cta:focus-visible {
+    outline: 2px solid var(--color-kixx-white);
+    outline-offset: 2px;
+}
+
+/* ── Carousel (social proof) ── */
+
+.booking-form__carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-4);
+    padding-top: var(--spacing-1);
+}
+
+.booking-form__carousel-icon {
+    width: var(--icon-size-lg);
+    height: var(--icon-size-lg);
+    flex-shrink: 0;
+}
+
+.booking-form__carousel-text {
+    font-family: var(--font-body);
+    font-size: var(--font-fixed-xs);
+    font-weight: var(--font-medium);
+    line-height: normal;
+    text-align: center;
+    white-space: nowrap;
+    color: var(--color-kixx-white);
+}
+
+@media (min-width: 768px) {
+    .booking-form__carousel-text {
+        font-size: var(--font-fixed-sm);
+        font-weight: var(--font-bold);
+    }
+}

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import "./components/BookingForm.css";
 
 /* ── Custom Fonts ────────────────────────────────────────────────────── */
 
@@ -46,15 +47,46 @@
     --color-kixx-orange: #FF7500;
     --color-kixx-white: #FFFFFF;
     --color-kixx-black: #000000;
+    --color-surface-brand-hover: #cc5e00;
 }
 
 /* ── Root  ───────────────────────────────────────────────────────────── */
 
 :root {
+    /* Clamp font sizes */
     --clamp-headline: clamp(6.25rem, 2.5rem + 16.6667vw, 17.5rem);
     --clamp-headline-sm: clamp(5rem, 2.5rem + 11.1111vw, 12rem);
     --clamp-display: clamp(5rem, 2.0833rem + 12.963vw, 13.75rem);
     --clamp-display-sm: clamp(2rem, 1.3333rem + 2.963vw, 4rem);
+
+    /* Spacing tokens */
+    --spacing-1: 0.25rem;
+    --spacing-3: 0.5rem;
+    --spacing-4: 0.75rem;
+    --spacing-5: 1rem;
+    --spacing-6: 1.5rem;
+    --spacing-10: 3.5rem;
+    --spacing-11: 4rem;
+
+    /* Fixed font sizes */
+    --font-fixed-xs: 0.875rem;
+    --font-fixed-sm: 1rem;
+    --font-fixed-md: 1.125rem;
+    --font-fixed-xl: 1.375rem;
+
+    /* Font weights */
+    --font-medium: 500;
+    --font-bold: 700;
+    --font-extrabold: 800;
+
+    /* Line heights */
+    --leading-2: 1.5rem;
+
+    /* Icon sizes */
+    --icon-size-lg: 1.5rem;
+
+    /* Border radius */
+    --radius-full: 6.25rem;
 }
 
 
@@ -167,29 +199,6 @@
 
 .nav-icon:hover span {
     color: var(--color-kixx-orange);
-}
-
-/* ── Booking Form ────────────────────────────────────────────────────── */
-
-.form-input {
-    color: var(--color-kixx-black);
-}
-
-.form-input::placeholder {
-    color: var(--color-kixx-black);
-    opacity: 0.5;
-}
-
-/* Academy / Birthday toggle tabs */
-.form-tab {
-    color: var(--color-kixx-black);
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.form-tab.active {
-    background-color: var(--color-kixx-black);
-    color: var(--color-kixx-white);
 }
 
 /* ── Loader ──────────────────────────────────────────────────────────── */

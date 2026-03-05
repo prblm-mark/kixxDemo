@@ -290,8 +290,11 @@ Figma says "Jakarta Sans" for `--font-title` but the actual font loaded is Graph
 
 #### HTML output
 
-No standalone demo pages. Component markup goes directly into `index.html` in the appropriate
-section. When adding new markup:
+**Build first, place second.** After implementing the component CSS (`src/components/<Name>.css`)
+and preparing the reference HTML markup, **STOP and ask the user** whether and where the
+component should be placed into `index.html`. Do not auto-integrate.
+
+When writing reference markup for the component:
 
 - Use semantic elements: `<button>` for actions, `<a>` for navigation, `<input>` for inputs
 - Icons: inline SVG — no external icon library
