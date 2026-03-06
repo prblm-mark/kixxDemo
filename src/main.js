@@ -77,7 +77,7 @@ document.fonts.ready.then(() => {
 
   gsap.set(headlineWords,     { opacity: 0, scale: 5, color: "#000000" });
   gsap.set(textNot,           { opacity: 0, scale: 0.5 });
-  gsap.set(logo,              { opacity: 0, y: -20 });
+  /* logo lives inside #main-nav — slides in with the nav, no separate set needed */
   gsap.set(wordGrowth,        { opacity: 0, scale: 0 });
   gsap.set(growthRows,        { opacity: 0, y: 0 });
   gsap.set(growthPhotoCycler, { opacity: 0, scale: 0 });

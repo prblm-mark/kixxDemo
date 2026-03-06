@@ -1,0 +1,26 @@
+/* ── Header ─────────────────────────────────────────────────────────── */
+/* Figma: node 119:86, file XFte2DW31CDfG581U5cn9W                     */
+/* Stateful styles only — layout/spacing/typography via Tailwind utils  */
+
+/* ── Nav action (hover + transition) ── */
+
+.header__action {
+    cursor: pointer;
+}
+
+.header__action svg * {
+    fill: white;
+    transition: fill 0.2s;
+}
+
+.header__action:hover svg * {
+    fill: var(--color-kixx-orange);
+}
+
+.header__action span {
+    transition: color 0.2s;
+}
+
+.header__action:hover span {
+    color: var(--color-kixx-orange);
+}

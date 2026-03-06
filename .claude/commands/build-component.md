@@ -202,7 +202,7 @@ Rules:
 - **Check for spurious variants in existing code** — if an existing CSS class has no Figma counterpart, remove it
 - **List any missing variants** not yet in CSS before implementing
 
-### 8. Implement
+### 8. Implement (component CSS only — do NOT touch `index.html` yet)
 
 Write the component following project conventions:
 
@@ -276,8 +276,37 @@ in the HTML.** Map each Figma token to its Tailwind equivalent:
 | `--icon-size-lg` (24px) | 24 | `size-6` |
 | `--radius-full` | — | `rounded-full` |
 
-**Never create custom `--spacing-*`, `--font-fixed-*`, or `--font-*` (weight) CSS vars when
-a Tailwind utility exists.** Use `text-[1.375rem]` for arbitrary values with no exact match.
+#### Figma token → implementation decision tree
+
+For every design value from Figma, follow this process:
+
+1. **Convert px to rem** — divide by 16 (e.g. 48px → 3rem, 118px → 7.375rem)
+2. **Check for a direct Tailwind utility match** — e.g. 3rem = `size-12`, 2rem = `px-8`
+3. **If TW match exists → use the utility** (e.g. `size-12`, `px-8`, `gap-4`)
+4. **If NO TW match → create a CSS token in rem** in `:root` (for non-color values) or
+   `@theme` (for colors), and use it via `var(--token-name)` or Tailwind arbitrary syntax
+
+Examples of NO match → create token:
+- 64px font size → 4rem → no `text-*` utility → add `:root { --font-fixed-header: 4rem; }`
+  then use `text-[length:var(--font-fixed-header)]`
+- 0.64px tracking → 0.04rem → no `tracking-*` utility → use `tracking-[0.04rem]`
+  (one-off values can stay as arbitrary rem; recurring values get tokens)
+
+**Never create custom `--spacing-*` CSS vars when a Tailwind utility exists.** Spacing tokens
+from Figma almost always map to Tailwind utilities (divide px by 4 = TW multiplier).
+
+**Always convert to relative units (rem).** Never leave px values in the output — not even in
+arbitrary Tailwind values like `text-[64px]`. Use `text-[4rem]` instead.
+
+**SVG icon sizing:** If the SVG viewBox is not square, use `w-{n} h-auto` (not `size-{n}`)
+to preserve the natural aspect ratio. Add `shrink-0` to prevent flex shrinking.
+
+**Follow Figma component hierarchy:** Never flatten nested layers into fewer HTML elements.
+If Figma shows a 3-level structure (e.g. button → icon wrapper → icon), build exactly 3 levels
+in HTML. The wrapper `<div>` controls the icon's bounding box (e.g. `size-12`); the SVG inside
+uses `size-full` to fill it. When an inline SVG has no built-in padding but the Figma raster
+asset includes transparent padding around the visible icon, adjust the SVG `viewBox` to add
+equivalent padding so the icon renders at the correct proportions within the wrapper.
 
 **Component CSS files (`src/components/*.css`) contain ONLY stateful styles:**
 - State classes toggled by JS (`.active`, `.selected`, `.open`)
@@ -327,6 +356,22 @@ exact text shown in the Figma design context output and use that — do not inve
 - `role="alert"` on error messages
 - `:focus-visible` outline: `2px solid var(--color-kixx-orange)`
 - Touch targets: minimum 44x44px for interactive elements
+
+#### STOP — ask before placing
+
+**CRITICAL: Step 8 ends here. Do NOT edit `index.html`.** At this point you have:
+- Created `src/components/<Name>.css` (stateful styles)
+- Added any new tokens to `@theme` or `:root` in `src/styles.css`
+- Added the `@import` in `src/styles.css`
+- Prepared reference HTML markup (in your head or notes — NOT written to a file)
+
+**Now STOP and ask the user:**
+
+> "The `<Name>` component CSS is built. Ready to place it into `index.html`?
+> If so, where should it go — replace existing markup, or insert at a specific location?"
+
+**Wait for the user's explicit approval before touching `index.html`.** This applies to
+both new components AND audit/refine of existing markup. No exceptions.
 
 ### 9. Document
 
