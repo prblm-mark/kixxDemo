@@ -76,7 +76,7 @@ document.fonts.ready.then(() => {
   // All animated elements start hidden / off-screen; GSAP reveals them.
 
   gsap.set(headlineWords,     { opacity: 0, scale: 5, color: "#000000" });
-  gsap.set(textNot,           { opacity: 0, scale: 0.5 });
+  gsap.set(textNot,           { opacity: 0, scale: 0.5, xPercent: -50, yPercent: -50 });
   /* logo lives inside #main-nav — slides in with the nav, no separate set needed */
   // Use GSAP's xPercent/yPercent for centering — survives transform changes and resize
   gsap.set(wordGrowth,        { opacity: 0, scale: 0, xPercent: -50, yPercent: -50 });
@@ -113,7 +113,15 @@ document.fonts.ready.then(() => {
   .to(wordAbout, { x: "0.4em",  duration: 0.6, ease: "expo.out" }, "<")
   .set(textNot, { zIndex: 1 }, "<")
   .to(textNot, {
-    opacity: 1, scale: 1, x: "-0.25em", rotation: -12,
+    opacity: 1, scale: 1, rotation: -12,
+    x: () => {
+      // NOT is centred in the parent span via left:50% + xPercent:-50.
+      // The visual gap between IT'S and ABOUT is left of the span's
+      // geometric centre because IT'S is narrower than ABOUT.
+      // Nudge left by half the width difference to land in the gap.
+      const diff = wordAbout.offsetWidth - wordIts.offsetWidth;
+      return `${-(diff / 2)}px`;
+    },
     duration: 0.6, ease: "expo.out",
   }, "<")
 
