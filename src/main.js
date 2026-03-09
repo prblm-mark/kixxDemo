@@ -78,9 +78,10 @@ document.fonts.ready.then(() => {
   gsap.set(headlineWords,     { opacity: 0, scale: 5, color: "#000000" });
   gsap.set(textNot,           { opacity: 0, scale: 0.5 });
   /* logo lives inside #main-nav — slides in with the nav, no separate set needed */
-  gsap.set(wordGrowth,        { opacity: 0, scale: 0 });
-  gsap.set(growthRows,        { opacity: 0, y: 0 });
-  gsap.set(growthPhotoCycler, { opacity: 0, scale: 0 });
+  // Use GSAP's xPercent/yPercent for centering — survives transform changes and resize
+  gsap.set(wordGrowth,        { opacity: 0, scale: 0, xPercent: -50, yPercent: -50 });
+  gsap.set(growthRows,        { opacity: 0, y: 0, xPercent: -50, yPercent: -50 });
+  gsap.set(growthPhotoCycler, { opacity: 0, scale: 0, xPercent: -50, yPercent: -50 });
   gsap.set("[data-growth-text]", { display: "inline-block" });
   gsap.set([benefitFriendships, benefitProgress, benefitConfidence], { opacity: 0, x: "-2em" });
   gsap.set([wordThatsWhat, wordIsAbout], { scale: 5 });
@@ -231,7 +232,16 @@ document.fonts.ready.then(() => {
 
   tl.addLabel("phase63", "phase6+=0.2")
     .to(innerRowWraps, {
-      x: "-20vw", duration: 0.7, ease: "expo.out", stagger: 0.06,
+      x: () => {
+        // Measure live so it works on resize — shift rows left to centre "REAL + BENEFIT"
+        const longestBenefit = Math.max(
+          benefitFriendships.scrollWidth,
+          benefitProgress.scrollWidth,
+          benefitConfidence.scrollWidth,
+        );
+        return `${-(longestBenefit / 2)}px`;
+      },
+      duration: 0.7, ease: "expo.out", stagger: 0.06,
     }, "phase63")
 
   // ── Phase 6.4: Benefit words emerge from behind REAL ────────────────
