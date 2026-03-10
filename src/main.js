@@ -374,12 +374,12 @@ function initBrandIntroAnimations() {
   const count = images.length;
 
   // Hide text initially
-  gsap.set(textEl, { y: 60, opacity: 0 });
+  gsap.set(textEl, { y: 400, opacity: 0.2 });
 
-  const stripTravel = () => (count - 1) * window.innerWidth + (count - 1) * 20;
-  // Text intro takes ~1 viewport of scroll, then images scroll at 2× distance
+  // One image width + gap
+  const oneSlide = () => window.innerWidth + 20;
   const textScrollZone = () => window.innerHeight;
-  const totalScroll = () => textScrollZone() + stripTravel() * 2;
+  const totalScroll = () => textScrollZone() + oneSlide() * 2;
 
   // Single pinned timeline scrubbed by scroll
   const brandTl = gsap.timeline({
@@ -388,7 +388,7 @@ function initBrandIntroAnimations() {
       start: "top top",
       end: () => "+=" + totalScroll(),
       pin: true,
-      scrub: 1.5,
+      scrub: 3,
       invalidateOnRefresh: true,
     },
   });
@@ -396,26 +396,20 @@ function initBrandIntroAnimations() {
   // Phase 1: text fades up into view
   brandTl.to(textEl, {
     y: 0, opacity: 1,
-    duration: 0.08,
+    duration: 1.10,
     ease: "power2.out",
   });
 
-  // Phase 2: hold text briefly
-  brandTl.to(textEl, {
-    y: 0, opacity: 1,
-    duration: 0.04,
-  });
-
-  // Phase 3: text continues up and fades off screen
+  // Phase 2: text slides up and fades off screen
   brandTl.to(textEl, {
     y: -120, opacity: 0,
-    duration: 0.08,
+    duration: 1.10,
     ease: "power2.in",
   });
 
-  // Phase 4: images scroll R→L
+  // Phase 4: scrub to next image (one slide R→L)
   brandTl.to(strip, {
-    x: () => -stripTravel(),
+    x: () => -oneSlide(),
     duration: 0.80,
     ease: "none",
   });
