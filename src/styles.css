@@ -180,27 +180,6 @@
 }
 
 /* Mobile nav bar */
-.brand-nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 1.25rem;
-  background: #1a1a1a;
-}
-
-.brand-nav-left {
-  position: absolute;
-  left: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 /* Kixx circle badge */
 .brand-badge {
   position: absolute;
