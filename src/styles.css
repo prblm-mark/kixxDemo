@@ -139,3 +139,176 @@
 #loader-ring {
     animation: loader-spin 6s linear infinite;
 }
+
+/* ── Brand Intro Section ── */
+#brand-intro {
+  position: relative;
+  z-index: 1;
+  background: #000;
+}
+
+.brand-block {
+  position: relative;
+  overflow: hidden;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Horizontal image strip — sits behind overlay + text */
+.brand-img-strip {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  gap: 20px;
+  height: 100%;
+  will-change: transform;
+}
+
+.brand-img-strip img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brand-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* Mobile nav bar */
+.brand-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+}
+
+.brand-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Kixx circle badge */
+.brand-badge {
+  position: absolute;
+  top: 4.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5rem;
+  height: auto;
+  z-index: 20;
+  opacity: 0.85;
+}
+
+/* Bottom CTA footer inside a block */
+.brand-block-footer {
+  position: absolute;
+  bottom: 1rem;
+  right: 1.25rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Text containers */
+.brand-text {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  color: white;
+}
+
+.brand-text--center {
+  text-align: center;
+}
+
+.brand-text--left {
+  text-align: left;
+}
+
+.brand-text--right {
+  text-align: right;
+}
+
+/* Desktop image (hidden on mobile) */
+.brand-img {
+  display: none;
+}
+
+.brand-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+  max-height: 70vh;
+}
+
+/* ── Desktop: two-column split (md: 768px+) ── */
+@media (min-width: 768px) {
+  .brand-block {
+    min-height: 80vh;
+  }
+
+  /* Split blocks become side-by-side */
+  .brand-block--split {
+    flex-direction: row;
+    background: #f9f9f9;
+  }
+
+  .brand-block--split .brand-bg-mobile {
+    display: none;
+  }
+
+  .brand-block--split .brand-text {
+    width: 50%;
+    padding: 4rem 3rem;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .brand-block--split .brand-text .font-display,
+  .brand-block--split .brand-text .font-title {
+    color: var(--color-kixx-orange);
+  }
+
+  .brand-block--split .brand-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    padding: 2rem;
+  }
+
+  /* Reverse block: image left, text right */
+  .brand-block--reverse {
+    flex-direction: row;
+  }
+
+  /* Hero blocks keep full-bleed image + overlay on desktop too */
+  .brand-block--hero .brand-bg-mobile {
+    display: block;
+  }
+
+  .brand-block--hero .brand-bg-overlay {
+    display: block;
+  }
+
+  .brand-block--hero .brand-text {
+    color: white;
+    max-width: 800px;
+  }
+}

@@ -357,4 +357,37 @@ document.fonts.ready.then(() => {
     });
   });
 
+  // Brand intro scroll animations
+  initBrandIntroAnimations();
+
 });
+
+function initBrandIntroAnimations() {
+  // Block 0: pinned section with horizontal image strip scrub
+  const block0 = document.querySelector('[data-brand="0"]');
+  if (!block0) return;
+
+  const strip = block0.querySelector(".brand-img-strip");
+  if (!strip) return;
+
+  const images = strip.querySelectorAll("img");
+  const count = images.length;
+
+  // Strip travel = total pixel width beyond the first image
+  const stripTravel = () => (count - 1) * window.innerWidth + (count - 1) * 20;
+  // Scroll distance is 2× the travel so images move at half scroll speed (slower)
+  const scrollDistance = () => stripTravel() * 2;
+
+  gsap.to(strip, {
+    x: () => -stripTravel(),
+    ease: "none",
+    scrollTrigger: {
+      trigger: block0,
+      start: "top top",
+      end: () => "+=" + scrollDistance(),
+      pin: true,
+      scrub: 1.5,  // 1.5s smooth lag behind scroll position
+      invalidateOnRefresh: true,
+    },
+  });
+}

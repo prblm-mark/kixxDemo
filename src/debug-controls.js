@@ -60,5 +60,6 @@ function addDebugControls(tl) {
 
   tl.eventCallback("onComplete", () => {
     playBtn.textContent = "Replay";
+    ScrollTrigger.refresh();
   });
 }
