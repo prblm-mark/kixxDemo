@@ -2,3 +2,5 @@ node_modules/
 dist/
 .idea/*
 !.idea/runConfigurations/
+*.mov
+*.mp4
