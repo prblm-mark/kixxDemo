@@ -415,7 +415,7 @@
             </svg>
             <span class="font-semi text-white text-sm tracking-widest uppercase">Menu</span>
           </div>
-          <span class="font-display text-white text-[1.75rem] leading-none">Kixx</span>
+          <img src="./src/img/logo.png" alt="Kixx" class="h-6">
         </nav>
 
         <!-- Kixx circle badge -->
@@ -424,15 +424,143 @@
         <!-- Headline -->
         <div class="brand-text">
           <h2 class="font-title text-kixx-orange text-[clamp(3.8rem,7vw,4rem)] leading-[1.1] uppercase">Watch them kick off with a smile and grow in confidence every single week.</h2>
+
+          <!-- Subtitle carousel (6 steps) -->
+          <div class="brand-subtitle-area">
+            <div class="brand-subtitle" data-step="0">
+              <p>From their very first session, you'll see it.</p>
+            </div>
+
+            <div class="brand-subtitle" data-step="1">
+              <p>The excitement. The pride. The moment they realise...</p>
+              <p class="font-display text-white text-[clamp(2.4rem,6vw,3rem)] leading-[1.1] mt-4">"I CAN DO THIS."</p>
+            </div>
+
+            <div class="brand-subtitle" data-step="2">
+              <p>Every step of their journey follows the Kixx Curriculum, built to help them develop real football skills alongside balance, coordination, teamwork and confidence.</p>
+            </div>
+
+            <div class="brand-subtitle" data-step="3">
+              <p>Each stage is matched to their age, so they're always challenged, always progressing, and always having fun.</p>
+            </div>
+
+            <div class="brand-subtitle" data-step="4">
+              <p>They'll make friends.</p>
+              <p>They'll learn to listen, try again and keep going.</p>
+              <p>They'll leave each session a little braver than when they arrived.</p>
+            </div>
+
+            <div class="brand-subtitle" data-step="5">
+              <p>It's not just about football.</p>
+              <p>It's about helping your child grow on and off the pitch.</p>
+              <p>Welcome to <span class="font-display text-white">#TEAMORANGE.</span></p>
+            </div>
+          </div>
         </div>
 
         <!-- Bottom CTA -->
         <div class="brand-block-footer">
-          <span class="font-semi text-white text-sm tracking-widest uppercase">Find your Kixx</span>
-          <span class="font-semi text-white text-sm">&reg;</span>
+          <span class="font-title text-white text-lg tracking-widest uppercase">Find your Kixx</span>
+          <svg width="28" height="28" viewBox="0 0 32 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8978 9.44134C20.013 9.4316 23.1779 12.2754 23.1732 15.9814L23.1322 16.371C22.6395 20.3804 19.9814 23.151 15.1771 23.1747C11.5949 23.1918 8.57174 20.0794 8.58139 16.5097C8.59119 12.6578 11.9105 9.45119 15.8978 9.44134ZM15.9701 12.6747C13.5508 12.6554 11.578 14.4013 11.5755 16.5634C11.5755 18.509 13.0782 20.0992 14.9574 20.1406C17.618 20.1989 19.8395 18.4238 19.8226 16.2568C19.8081 14.394 17.977 12.6918 15.9701 12.6747Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3919 0.989194C17.1779 -1.0417 23.3562 -0.0697894 28.5345 5.06537C30.9095 7.42017 31.2586 10.6238 31.6917 13.7304C31.8282 14.7185 31.7123 15.742 31.7123 16.749V16.7519C31.7663 22.0406 30.693 27.0978 28.4076 31.8593C25.543 37.8243 22.9119 43.9101 19.3177 49.5038C17.8443 51.7947 16.1681 52.1566 14.0804 50.3671C11.3665 48.0383 9.79366 44.8842 8.15073 41.8154C4.81549 35.5809 2.24335 29.0105 0.76987 22.0976C-0.289328 17.1374 -0.562164 12.0092 1.96811 7.33978C3.75699 4.03691 6.82361 2.05548 10.3919 0.989194ZM21.808 5.84759C17.3288 3.68905 12.7386 3.88267 8.46421 6.62982C6.70127 7.76227 5.43255 9.35609 4.75229 11.4247C3.09758 16.4677 4.45781 21.3292 5.82065 26.079C7.80019 32.9755 10.8693 39.449 14.4447 45.6669C14.6988 46.109 14.77 46.787 15.4124 46.832C16.1608 46.8816 16.2859 46.1422 16.5824 45.6669C19.5011 40.9786 21.5063 35.8358 23.8578 30.8661C25.8891 26.575 26.9295 22.0566 26.6517 17.2831L26.6546 17.2792C26.6546 15.9151 26.7112 14.5502 26.6429 13.1884C26.4757 9.79823 24.6935 7.23777 21.808 5.84759Z" fill="white"/>
+          </svg>
         </div>
       </div>
 
+    </section>
+
+    <!-- Kixx in Action: TikTok-style video carousel -->
+    <section id="kixx-in-action" class="bg-black py-16 px-4 md:px-8 overflow-hidden">
+      <h2 class="font-title text-kixx-orange text-[clamp(4.5rem,6vw,7rem)] text-center mb-10 uppercase">Kixx in Action</h2>
+      <div class="kixx-video-carousel">
+        <div class="kixx-video-card">
+          <video src="./src/media/action-1.mp4" muted playsinline loop preload="none"></video>
+          <button class="kixx-sound-btn" aria-label="Unmute">
+            <svg class="icon-muted" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.63 3.63a.996.996 0 000 1.41L7.29 8.7 7 9H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71v-4.17l4.18 4.18c-.49.37-1.02.68-1.6.91-.36.15-.58.53-.58.92 0 .72.73 1.18 1.39.91.8-.33 1.55-.77 2.22-1.31l1.34 1.34a.996.996 0 101.41-1.41L5.05 3.63c-.39-.39-1.02-.39-1.42 0zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-3.83-2.4-7.11-5.78-8.4-.59-.23-1.22.23-1.22.86v.19c0 .38.25.71.61.85C17.18 6.54 19 9.06 19 12zm-8.71-6.29l-.17.17L12 7.76V6.41c0-.89-1.08-1.33-1.71-.7zM16.5 12A4.5 4.5 0 0014 7.97v1.79l2.48 2.48c.01-.08.02-.16.02-.24z"/></svg>
+            <svg class="icon-unmuted" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-3.99zM14 3.23v.06c0 .38.25.71.6.85C17.18 5.18 19 7.69 19 12s-1.82 6.82-4.4 7.86c-.36.15-.6.47-.6.85v.06c0 .63.63 1.08 1.22.85C18.6 20.11 21 16.39 21 12s-2.4-8.11-5.78-9.61c-.59-.24-1.22.22-1.22.84z"/></svg>
+          </button>
+        </div>
+        <div class="kixx-video-card">
+          <video src="./src/media/action-2.mp4" muted playsinline loop preload="none"></video>
+          <button class="kixx-sound-btn" aria-label="Unmute">
+            <svg class="icon-muted" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.63 3.63a.996.996 0 000 1.41L7.29 8.7 7 9H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71v-4.17l4.18 4.18c-.49.37-1.02.68-1.6.91-.36.15-.58.53-.58.92 0 .72.73 1.18 1.39.91.8-.33 1.55-.77 2.22-1.31l1.34 1.34a.996.996 0 101.41-1.41L5.05 3.63c-.39-.39-1.02-.39-1.42 0zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-3.83-2.4-7.11-5.78-8.4-.59-.23-1.22.23-1.22.86v.19c0 .38.25.71.61.85C17.18 6.54 19 9.06 19 12zm-8.71-6.29l-.17.17L12 7.76V6.41c0-.89-1.08-1.33-1.71-.7zM16.5 12A4.5 4.5 0 0014 7.97v1.79l2.48 2.48c.01-.08.02-.16.02-.24z"/></svg>
+            <svg class="icon-unmuted" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-3.99zM14 3.23v.06c0 .38.25.71.6.85C17.18 5.18 19 7.69 19 12s-1.82 6.82-4.4 7.86c-.36.15-.6.47-.6.85v.06c0 .63.63 1.08 1.22.85C18.6 20.11 21 16.39 21 12s-2.4-8.11-5.78-9.61c-.59-.24-1.22.22-1.22.84z"/></svg>
+          </button>
+        </div>
+        <div class="kixx-video-card">
+          <video src="./src/media/action-3.mp4" muted playsinline loop preload="none"></video>
+          <button class="kixx-sound-btn" aria-label="Unmute">
+            <svg class="icon-muted" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.63 3.63a.996.996 0 000 1.41L7.29 8.7 7 9H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71v-4.17l4.18 4.18c-.49.37-1.02.68-1.6.91-.36.15-.58.53-.58.92 0 .72.73 1.18 1.39.91.8-.33 1.55-.77 2.22-1.31l1.34 1.34a.996.996 0 101.41-1.41L5.05 3.63c-.39-.39-1.02-.39-1.42 0zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-3.83-2.4-7.11-5.78-8.4-.59-.23-1.22.23-1.22.86v.19c0 .38.25.71.61.85C17.18 6.54 19 9.06 19 12zm-8.71-6.29l-.17.17L12 7.76V6.41c0-.89-1.08-1.33-1.71-.7zM16.5 12A4.5 4.5 0 0014 7.97v1.79l2.48 2.48c.01-.08.02-.16.02-.24z"/></svg>
+            <svg class="icon-unmuted" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-3.99zM14 3.23v.06c0 .38.25.71.6.85C17.18 5.18 19 7.69 19 12s-1.82 6.82-4.4 7.86c-.36.15-.6.47-.6.85v.06c0 .63.63 1.08 1.22.85C18.6 20.11 21 16.39 21 12s-2.4-8.11-5.78-9.61c-.59-.24-1.22.22-1.22.84z"/></svg>
+          </button>
+        </div>
+        <div class="kixx-video-card">
+          <video src="./src/media/action-1.mp4" muted playsinline loop preload="none"></video>
+          <button class="kixx-sound-btn" aria-label="Unmute">
+            <svg class="icon-muted" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.63 3.63a.996.996 0 000 1.41L7.29 8.7 7 9H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71v-4.17l4.18 4.18c-.49.37-1.02.68-1.6.91-.36.15-.58.53-.58.92 0 .72.73 1.18 1.39.91.8-.33 1.55-.77 2.22-1.31l1.34 1.34a.996.996 0 101.41-1.41L5.05 3.63c-.39-.39-1.02-.39-1.42 0zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-3.83-2.4-7.11-5.78-8.4-.59-.23-1.22.23-1.22.86v.19c0 .38.25.71.61.85C17.18 6.54 19 9.06 19 12zm-8.71-6.29l-.17.17L12 7.76V6.41c0-.89-1.08-1.33-1.71-.7zM16.5 12A4.5 4.5 0 0014 7.97v1.79l2.48 2.48c.01-.08.02-.16.02-.24z"/></svg>
+            <svg class="icon-unmuted" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-3.99zM14 3.23v.06c0 .38.25.71.6.85C17.18 5.18 19 7.69 19 12s-1.82 6.82-4.4 7.86c-.36.15-.6.47-.6.85v.06c0 .63.63 1.08 1.22.85C18.6 20.11 21 16.39 21 12s-2.4-8.11-5.78-9.61c-.59-.24-1.22.22-1.22.84z"/></svg>
+          </button>
+        </div>
+        <div class="kixx-video-card">
+          <video src="./src/media/action-2.mp4" muted playsinline loop preload="none"></video>
+          <button class="kixx-sound-btn" aria-label="Unmute">
+            <svg class="icon-muted" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.63 3.63a.996.996 0 000 1.41L7.29 8.7 7 9H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71v-4.17l4.18 4.18c-.49.37-1.02.68-1.6.91-.36.15-.58.53-.58.92 0 .72.73 1.18 1.39.91.8-.33 1.55-.77 2.22-1.31l1.34 1.34a.996.996 0 101.41-1.41L5.05 3.63c-.39-.39-1.02-.39-1.42 0zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-3.83-2.4-7.11-5.78-8.4-.59-.23-1.22.23-1.22.86v.19c0 .38.25.71.61.85C17.18 6.54 19 9.06 19 12zm-8.71-6.29l-.17.17L12 7.76V6.41c0-.89-1.08-1.33-1.71-.7zM16.5 12A4.5 4.5 0 0014 7.97v1.79l2.48 2.48c.01-.08.02-.16.02-.24z"/></svg>
+            <svg class="icon-unmuted" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-3.99zM14 3.23v.06c0 .38.25.71.6.85C17.18 5.18 19 7.69 19 12s-1.82 6.82-4.4 7.86c-.36.15-.6.47-.6.85v.06c0 .63.63 1.08 1.22.85C18.6 20.11 21 16.39 21 12s-2.4-8.11-5.78-9.61c-.59-.24-1.22.22-1.22.84z"/></svg>
+          </button>
+        </div>
+        <div class="kixx-video-card">
+          <video src="./src/media/action-3.mp4" muted playsinline loop preload="none"></video>
+          <button class="kixx-sound-btn" aria-label="Unmute">
+            <svg class="icon-muted" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.63 3.63a.996.996 0 000 1.41L7.29 8.7 7 9H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71v-4.17l4.18 4.18c-.49.37-1.02.68-1.6.91-.36.15-.58.53-.58.92 0 .72.73 1.18 1.39.91.8-.33 1.55-.77 2.22-1.31l1.34 1.34a.996.996 0 101.41-1.41L5.05 3.63c-.39-.39-1.02-.39-1.42 0zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-3.83-2.4-7.11-5.78-8.4-.59-.23-1.22.23-1.22.86v.19c0 .38.25.71.61.85C17.18 6.54 19 9.06 19 12zm-8.71-6.29l-.17.17L12 7.76V6.41c0-.89-1.08-1.33-1.71-.7zM16.5 12A4.5 4.5 0 0014 7.97v1.79l2.48 2.48c.01-.08.02-.16.02-.24z"/></svg>
+            <svg class="icon-unmuted" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-3.99zM14 3.23v.06c0 .38.25.71.6.85C17.18 5.18 19 7.69 19 12s-1.82 6.82-4.4 7.86c-.36.15-.6.47-.6.85v.06c0 .63.63 1.08 1.22.85C18.6 20.11 21 16.39 21 12s-2.4-8.11-5.78-9.61c-.59-.24-1.22.22-1.22.84z"/></svg>
+          </button>
+        </div>
+        <div class="kixx-video-card">
+          <video src="./src/media/action-1.mp4" muted playsinline loop preload="none"></video>
+          <button class="kixx-sound-btn" aria-label="Unmute">
+            <svg class="icon-muted" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.63 3.63a.996.996 0 000 1.41L7.29 8.7 7 9H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71v-4.17l4.18 4.18c-.49.37-1.02.68-1.6.91-.36.15-.58.53-.58.92 0 .72.73 1.18 1.39.91.8-.33 1.55-.77 2.22-1.31l1.34 1.34a.996.996 0 101.41-1.41L5.05 3.63c-.39-.39-1.02-.39-1.42 0zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-3.83-2.4-7.11-5.78-8.4-.59-.23-1.22.23-1.22.86v.19c0 .38.25.71.61.85C17.18 6.54 19 9.06 19 12zm-8.71-6.29l-.17.17L12 7.76V6.41c0-.89-1.08-1.33-1.71-.7zM16.5 12A4.5 4.5 0 0014 7.97v1.79l2.48 2.48c.01-.08.02-.16.02-.24z"/></svg>
+            <svg class="icon-unmuted" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-3.99zM14 3.23v.06c0 .38.25.71.6.85C17.18 5.18 19 7.69 19 12s-1.82 6.82-4.4 7.86c-.36.15-.6.47-.6.85v.06c0 .63.63 1.08 1.22.85C18.6 20.11 21 16.39 21 12s-2.4-8.11-5.78-9.61c-.59-.24-1.22.22-1.22.84z"/></svg>
+          </button>
+        </div>
+        <div class="kixx-video-card">
+          <video src="./src/media/action-2.mp4" muted playsinline loop preload="none"></video>
+          <button class="kixx-sound-btn" aria-label="Unmute">
+            <svg class="icon-muted" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.63 3.63a.996.996 0 000 1.41L7.29 8.7 7 9H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71v-4.17l4.18 4.18c-.49.37-1.02.68-1.6.91-.36.15-.58.53-.58.92 0 .72.73 1.18 1.39.91.8-.33 1.55-.77 2.22-1.31l1.34 1.34a.996.996 0 101.41-1.41L5.05 3.63c-.39-.39-1.02-.39-1.42 0zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-3.83-2.4-7.11-5.78-8.4-.59-.23-1.22.23-1.22.86v.19c0 .38.25.71.61.85C17.18 6.54 19 9.06 19 12zm-8.71-6.29l-.17.17L12 7.76V6.41c0-.89-1.08-1.33-1.71-.7zM16.5 12A4.5 4.5 0 0014 7.97v1.79l2.48 2.48c.01-.08.02-.16.02-.24z"/></svg>
+            <svg class="icon-unmuted" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-3.99zM14 3.23v.06c0 .38.25.71.6.85C17.18 5.18 19 7.69 19 12s-1.82 6.82-4.4 7.86c-.36.15-.6.47-.6.85v.06c0 .63.63 1.08 1.22.85C18.6 20.11 21 16.39 21 12s-2.4-8.11-5.78-9.61c-.59-.24-1.22.22-1.22.84z"/></svg>
+          </button>
+        </div>
+        <div class="kixx-video-card">
+          <video src="./src/media/action-3.mp4" muted playsinline loop preload="none"></video>
+          <button class="kixx-sound-btn" aria-label="Unmute">
+            <svg class="icon-muted" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3.63 3.63a.996.996 0 000 1.41L7.29 8.7 7 9H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71v-4.17l4.18 4.18c-.49.37-1.02.68-1.6.91-.36.15-.58.53-.58.92 0 .72.73 1.18 1.39.91.8-.33 1.55-.77 2.22-1.31l1.34 1.34a.996.996 0 101.41-1.41L5.05 3.63c-.39-.39-1.02-.39-1.42 0zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-3.83-2.4-7.11-5.78-8.4-.59-.23-1.22.23-1.22.86v.19c0 .38.25.71.61.85C17.18 6.54 19 9.06 19 12zm-8.71-6.29l-.17.17L12 7.76V6.41c0-.89-1.08-1.33-1.71-.7zM16.5 12A4.5 4.5 0 0014 7.97v1.79l2.48 2.48c.01-.08.02-.16.02-.24z"/></svg>
+            <svg class="icon-unmuted" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-3.99zM14 3.23v.06c0 .38.25.71.6.85C17.18 5.18 19 7.69 19 12s-1.82 6.82-4.4 7.86c-.36.15-.6.47-.6.85v.06c0 .63.63 1.08 1.22.85C18.6 20.11 21 16.39 21 12s-2.4-8.11-5.78-9.61c-.59-.24-1.22.22-1.22.84z"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parent Stories / Testimonials -->
+    <section id="parent-stories" class="bg-black py-16 px-4 md:px-8">
+      <h2 class="font-title text-kixx-orange text-[clamp(4.5rem,6vw,7rem)] text-center mb-10 uppercase">Parent Stories</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <!-- Story 1 -->
+        <div class="relative rounded-2xl overflow-hidden group">
+          <img src="./src/img/friendships/P1163687.webp" alt="Parent story" class="w-full aspect-[4/5] object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6">
+            <p class="font-semi text-white text-lg leading-relaxed">"Since joining Kixx, my son's confidence has completely transformed. He walks in shy and leaves buzzing every single week."</p>
+            <span class="font-semi text-kixx-orange text-sm mt-3 uppercase tracking-widest">— Sarah, mum of Leo (age 4)</span>
+          </div>
+        </div>
+        <!-- Story 2 -->
+        <div class="relative rounded-2xl overflow-hidden group">
+          <img src="./src/img/confidence/P1174187.webp" alt="Parent story" class="w-full aspect-[4/5] object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6">
+            <p class="font-semi text-white text-lg leading-relaxed">"The friendships she's made here are incredible. She talks about her Kixx friends all week long."</p>
+            <span class="font-semi text-kixx-orange text-sm mt-3 uppercase tracking-widest">— James, dad of Isla (age 5)</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Spacer to mark end of brand-intro -->

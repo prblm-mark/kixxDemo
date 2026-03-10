@@ -368,49 +368,159 @@ function initBrandIntroAnimations() {
 
   const strip = block0.querySelector(".brand-img-strip");
   const textEl = block0.querySelector(".brand-text");
-  if (!strip) return;
-
-  const images = strip.querySelectorAll("img");
-  const count = images.length;
+  const h2 = block0.querySelector(".brand-text h2");
+  const subtitles = block0.querySelectorAll(".brand-subtitle");
+  if (!strip || !h2) return;
 
   // Hide text initially
-  gsap.set(textEl, { y: 400, opacity: 0.2 });
+  gsap.set(textEl, { y: 400, opacity: 0 });
 
-  // One image width + gap
-  const oneSlide = () => window.innerWidth + 20;
-  const textScrollZone = () => window.innerHeight;
-  const totalScroll = () => textScrollZone() + oneSlide() * 2;
+  // 6 subtitle steps + headline = 7 scroll beats, plus some breathing room
+  const totalScroll = () => window.innerHeight * 12;
+
+  // Slow background drift: span all images (7 images, first already visible = 6 slides)
+  const images = strip.querySelectorAll("img");
+  const totalDrift = () => (window.innerWidth + 20) * (images.length - 1);
 
   // Single pinned timeline scrubbed by scroll
   const brandTl = gsap.timeline({
     scrollTrigger: {
       trigger: block0,
       start: "top top",
-      end: () => "+=" + totalScroll(),
+      end: () => "+=" + (totalScroll() + window.innerHeight * 3),
       pin: true,
       scrub: 3,
       invalidateOnRefresh: true,
     },
   });
 
-  // Phase 1: text fades up into view
+  // Hold on first image before anything animates
+  brandTl.to({}, { duration: 0.75 });
+
+  // Phase 1: entire text block fades up into view (headline stays visible throughout)
   brandTl.to(textEl, {
     y: 0, opacity: 1,
-    duration: 1.10,
+    duration: 1,
     ease: "power2.out",
   });
 
-  // Phase 2: text slides up and fades off screen
-  brandTl.to(textEl, {
-    y: -120, opacity: 0,
-    duration: 1.10,
-    ease: "power2.in",
+  // Hold headline before subtitles start
+  brandTl.to({}, { duration: 0.5 });
+
+  // Phase 2–7: subtitle carousel (6 steps) — headline remains visible
+  subtitles.forEach((sub, i) => {
+    // Slide in
+    brandTl.to(sub, {
+      y: 0, opacity: 1,
+      duration: 0.8,
+      ease: "power2.out",
+    });
+    // Hold
+    brandTl.to({}, { duration: 1.4 });
+    // Slide out (skip fade-out on last subtitle so it lingers)
+    if (i < subtitles.length - 1) {
+      brandTl.to(sub, {
+        y: -40, opacity: 0,
+        duration: 0.8,
+        ease: "power2.in",
+      });
+    }
   });
 
-  // Phase 4: scrub to next image (one slide R→L)
+  // Background strip: starts after the initial hold, finishes with last subtitle
+  const driftEnd = brandTl.duration();
+  const driftStart = 0.75; // matches the initial hold duration
   brandTl.to(strip, {
-    x: () => -oneSlide(),
-    duration: 0.80,
+    x: () => -totalDrift(),
+    duration: driftEnd - driftStart,
     ease: "none",
+  }, driftStart);
+
+  // Hold at the end — images are static, pin stays
+  brandTl.to({}, { duration: 1.5 });
+}
+
+/* ── Kixx in Action: platform-aware video playback + sound toggle ── */
+{
+  const cards = document.querySelectorAll(".kixx-video-card");
+  const actionVideos = document.querySelectorAll(".kixx-video-card video");
+  const soundBtns = document.querySelectorAll(".kixx-sound-btn");
+  const desktopMQ = window.matchMedia("(min-width: 768px)");
+
+  function remuteBtnUI(video) {
+    const btn = video.closest(".kixx-video-card").querySelector(".kixx-sound-btn");
+    if (btn) {
+      btn.querySelector(".icon-muted").style.display = "";
+      btn.querySelector(".icon-unmuted").style.display = "none";
+    }
+  }
+
+  if (actionVideos.length) {
+    const firstVideo = actionVideos[0];
+
+    // IntersectionObserver — behaviour varies by platform
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        const video = e.target;
+        const isFirst = video === firstVideo;
+
+        if (e.isIntersecting) {
+          if (desktopMQ.matches) {
+            // Desktop: only auto-play the first card; preload others
+            if (isFirst) {
+              video.play().catch(() => {});
+            } else {
+              video.load();
+            }
+          } else {
+            // Mobile: auto-play every visible card (TikTok-style snap)
+            video.play().catch(() => {});
+          }
+        } else {
+          // Out of view: pause + re-mute (both platforms)
+          video.pause();
+          video.muted = true;
+          remuteBtnUI(video);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    actionVideos.forEach((v) => io.observe(v));
+
+    // Desktop hover-to-play on non-first cards (also works on first)
+    cards.forEach((card) => {
+      const video = card.querySelector("video");
+
+      card.addEventListener("mouseenter", () => {
+        if (!desktopMQ.matches) return;
+        video.play().catch(() => {});
+      });
+
+      card.addEventListener("mouseleave", () => {
+        if (!desktopMQ.matches) return;
+        video.pause(); // holds current frame
+      });
+    });
+  }
+
+  // Sound toggle — only one video unmuted at a time
+  soundBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const card = btn.closest(".kixx-video-card");
+      const vid = card.querySelector("video");
+      const willUnmute = vid.muted;
+
+      // Mute all others first
+      actionVideos.forEach((v) => {
+        v.muted = true;
+        remuteBtnUI(v);
+      });
+
+      // Toggle this one
+      vid.muted = !willUnmute;
+      btn.querySelector(".icon-muted").style.display = willUnmute ? "none" : "";
+      btn.querySelector(".icon-unmuted").style.display = willUnmute ? "" : "none";
+    });
   });
 }
