@@ -363,31 +363,60 @@ document.fonts.ready.then(() => {
 });
 
 function initBrandIntroAnimations() {
-  // Block 0: pinned section with horizontal image strip scrub
   const block0 = document.querySelector('[data-brand="0"]');
   if (!block0) return;
 
   const strip = block0.querySelector(".brand-img-strip");
+  const textEl = block0.querySelector(".brand-text");
   if (!strip) return;
 
   const images = strip.querySelectorAll("img");
   const count = images.length;
 
-  // Strip travel = total pixel width beyond the first image
-  const stripTravel = () => (count - 1) * window.innerWidth + (count - 1) * 20;
-  // Scroll distance is 2× the travel so images move at half scroll speed (slower)
-  const scrollDistance = () => stripTravel() * 2;
+  // Hide text initially
+  gsap.set(textEl, { y: 60, opacity: 0 });
 
-  gsap.to(strip, {
-    x: () => -stripTravel(),
-    ease: "none",
+  const stripTravel = () => (count - 1) * window.innerWidth + (count - 1) * 20;
+  // Text intro takes ~1 viewport of scroll, then images scroll at 2× distance
+  const textScrollZone = () => window.innerHeight;
+  const totalScroll = () => textScrollZone() + stripTravel() * 2;
+
+  // Single pinned timeline scrubbed by scroll
+  const brandTl = gsap.timeline({
     scrollTrigger: {
       trigger: block0,
       start: "top top",
-      end: () => "+=" + scrollDistance(),
+      end: () => "+=" + totalScroll(),
       pin: true,
-      scrub: 1.5,  // 1.5s smooth lag behind scroll position
+      scrub: 1.5,
       invalidateOnRefresh: true,
     },
+  });
+
+  // Phase 1: text fades up into view
+  brandTl.to(textEl, {
+    y: 0, opacity: 1,
+    duration: 0.08,
+    ease: "power2.out",
+  });
+
+  // Phase 2: hold text briefly
+  brandTl.to(textEl, {
+    y: 0, opacity: 1,
+    duration: 0.04,
+  });
+
+  // Phase 3: text continues up and fades off screen
+  brandTl.to(textEl, {
+    y: -120, opacity: 0,
+    duration: 0.08,
+    ease: "power2.in",
+  });
+
+  // Phase 4: images scroll R→L
+  brandTl.to(strip, {
+    x: () => -stripTravel(),
+    duration: 0.80,
+    ease: "none",
   });
 }
