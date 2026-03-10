@@ -165,27 +165,32 @@
   justify-content: center;
 }
 
-/* Horizontal image strip — sits behind overlay + text */
+/* Stacking image strip — each image covers the previous */
 .brand-img-strip {
   position: absolute;
   inset: 0;
-  display: flex;
-  gap: 20px;
-  height: 100%;
-  will-change: transform;
+  overflow: hidden;
 }
 
 .brand-img-strip img {
-  flex: 0 0 100%;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  will-change: transform;
 }
 
 .brand-bg-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  z-index: 10;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.55) 50%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  pointer-events: none;
 }
 
 /* Mobile nav bar */

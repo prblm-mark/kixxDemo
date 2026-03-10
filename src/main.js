@@ -378,9 +378,14 @@ function initBrandIntroAnimations() {
   // 6 subtitle steps + headline = 7 scroll beats, plus some breathing room
   const totalScroll = () => window.innerHeight * 12;
 
-  // Slow background drift: span all images (7 images, first already visible = 6 slides)
+  // Stack images: first visible, rest waiting below
   const images = strip.querySelectorAll("img");
-  const totalDrift = () => (window.innerWidth + 20) * (images.length - 1);
+  images.forEach((img, i) => {
+    gsap.set(img, {
+      zIndex: i + 1,           // later images sit on top
+      yPercent: i === 0 ? 0 : 100, // first visible, rest below
+    });
+  });
 
   // Single pinned timeline scrubbed by scroll
   const brandTl = gsap.timeline({
@@ -427,14 +432,20 @@ function initBrandIntroAnimations() {
     }
   });
 
-  // Background strip: starts after the initial hold, finishes with last subtitle
+  // Background images: each slides up to cover the previous, spread across the timeline
   const driftEnd = brandTl.duration();
   const driftStart = 0.75; // matches the initial hold duration
-  brandTl.to(strip, {
-    x: () => -totalDrift(),
-    duration: driftEnd - driftStart,
-    ease: "none",
-  }, driftStart);
+  const driftDuration = driftEnd - driftStart;
+  const slideCount = images.length - 1; // first image is already visible
+
+  for (let i = 1; i <= slideCount; i++) {
+    const slideStart = driftStart + (driftDuration / slideCount) * (i - 1);
+    brandTl.to(images[i], {
+      yPercent: 0,
+      duration: driftDuration / slideCount,
+      ease: "power1.inOut",
+    }, slideStart);
+  }
 
   // Hold at the end — images are static, pin stays
   brandTl.to({}, { duration: 1.5 });
