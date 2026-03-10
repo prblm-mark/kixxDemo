@@ -21,11 +21,20 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: "GraphikXSemibold";
+    src: url("../src/fonts/Graphik-XSemibold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* ── Tailwind v4 Theme Tokens ────────────────────────────────────────── */
 
 @theme {
     --font-display: "Atomic", sans-serif;
     --font-title: "GraphikXXXBold", sans-serif;
+    --font-semi: "GraphikXSemibold", sans-serif;
     --font-body: "Plus Jakarta Sans", sans-serif;
     --color-kixx-orange: #FF7500;
     --color-kixx-white: #FFFFFF;
