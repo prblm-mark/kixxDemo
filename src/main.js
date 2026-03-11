@@ -376,15 +376,15 @@ function initBrandIntroAnimations() {
 
 
   // 6 subtitle steps + headline = 7 scroll beats, plus some breathing room
-  const totalScroll = () => window.innerHeight * 12;
+  const totalScroll = () => window.innerHeight * (isDesktop ? 12 : 3);
 
   if (!isDesktop) {
-  // Stack images: first visible, rest waiting below
+  // Stack images: first visible, rest waiting below (match desktop gap offset)
   const images = strip.querySelectorAll("img");
   images.forEach((img, i) => {
     gsap.set(img, {
-      zIndex: i + 1,           // later images sit on top
-      yPercent: i === 0 ? 0 : 100, // first visible, rest below
+      zIndex: i + 1,
+      yPercent: i === 0 ? 0 : 104,
     });
   });
   } else {
@@ -434,20 +434,18 @@ function initBrandIntroAnimations() {
   });
 
   if (!isDesktop) {
-    // Background images: each slides up to cover the previous, spread across the timeline
+    // Background images: continuous scroll-through matching desktop style
     const images = strip.querySelectorAll("img");
-    const driftEnd = brandTl.duration();
-    const driftStart = 0.75; // matches the initial hold duration
-    const driftDuration = driftEnd - driftStart;
-    const slideCount = images.length - 1; // first image is already visible
+    const tlDuration = brandTl.duration();
+    const driftStart = 0;
+    const driftRange = tlDuration - driftStart;
+    const slideCount = images.length - 1;
 
-    for (let i = 1; i <= slideCount; i++) {
-      const slideStart = driftStart + (driftDuration / slideCount) * (i - 1);
-      brandTl.to(images[i], {
-        yPercent: 0,
-        duration: driftDuration / slideCount,
-        ease: "power1.inOut",
-      }, slideStart);
+    const slideDur = driftRange / slideCount;
+    for (let i = 0; i < slideCount; i++) {
+      const pos = driftStart + slideDur * i;
+      brandTl.to(images[i],     { yPercent: -104, duration: slideDur, ease: "none" }, pos);
+      brandTl.to(images[i + 1], { yPercent: 0,    duration: slideDur, ease: "none" }, pos);
     }
   } else {
     const leftImgs = block0.querySelectorAll(".brand-panel--left img");
