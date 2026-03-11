@@ -366,11 +366,13 @@ function initBrandIntroAnimations() {
   const block0 = document.querySelector('[data-brand="0"]');
   if (!block0) return;
 
+  const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
   const strip = block0.querySelector(".brand-img-strip");
   const textEl = block0.querySelector(".brand-text");
   const h2 = block0.querySelector(".brand-text h2");
   const subtitles = block0.querySelectorAll(".brand-subtitle");
-  if (!strip || !h2) return;
+  if (!h2) return;
+  if (!isDesktop && !strip) return;
 
   // Hide text initially
   gsap.set(textEl, { y: 400, opacity: 0 });
@@ -378,6 +380,7 @@ function initBrandIntroAnimations() {
   // 6 subtitle steps + headline = 7 scroll beats, plus some breathing room
   const totalScroll = () => window.innerHeight * 12;
 
+  if (!isDesktop) {
   // Stack images: first visible, rest waiting below
   const images = strip.querySelectorAll("img");
   images.forEach((img, i) => {
@@ -386,6 +389,12 @@ function initBrandIntroAnimations() {
       yPercent: i === 0 ? 0 : 100, // first visible, rest below
     });
   });
+  } else {
+    const leftImgs = block0.querySelectorAll(".brand-panel--left img");
+    const rightImgs = block0.querySelectorAll(".brand-panel--right img");
+    leftImgs.forEach((img, i) => gsap.set(img, { yPercent: i === 0 ? 0 : 100 }));
+    rightImgs.forEach((img, i) => gsap.set(img, { yPercent: i === 0 ? 0 : 100 }));
+  }
 
   // Single pinned timeline scrubbed by scroll
   const brandTl = gsap.timeline({
@@ -432,19 +441,46 @@ function initBrandIntroAnimations() {
     }
   });
 
-  // Background images: each slides up to cover the previous, spread across the timeline
-  const driftEnd = brandTl.duration();
-  const driftStart = 0.75; // matches the initial hold duration
-  const driftDuration = driftEnd - driftStart;
-  const slideCount = images.length - 1; // first image is already visible
+  if (!isDesktop) {
+    // Background images: each slides up to cover the previous, spread across the timeline
+    const images = strip.querySelectorAll("img");
+    const driftEnd = brandTl.duration();
+    const driftStart = 0.75; // matches the initial hold duration
+    const driftDuration = driftEnd - driftStart;
+    const slideCount = images.length - 1; // first image is already visible
 
-  for (let i = 1; i <= slideCount; i++) {
-    const slideStart = driftStart + (driftDuration / slideCount) * (i - 1);
-    brandTl.to(images[i], {
-      yPercent: 0,
-      duration: driftDuration / slideCount,
-      ease: "power1.inOut",
-    }, slideStart);
+    for (let i = 1; i <= slideCount; i++) {
+      const slideStart = driftStart + (driftDuration / slideCount) * (i - 1);
+      brandTl.to(images[i], {
+        yPercent: 0,
+        duration: driftDuration / slideCount,
+        ease: "power1.inOut",
+      }, slideStart);
+    }
+  } else {
+    const leftImgs = block0.querySelectorAll(".brand-panel--left img");
+    const rightImgs = block0.querySelectorAll(".brand-panel--right img");
+    const tlDuration = brandTl.duration();
+    const fadeStart = 0.75;
+    const fadeDuration = tlDuration - fadeStart;
+    const slideDur = 0.8;
+
+    // Staggered percentages — columns never swap at the same time
+    const leftPoints  = [0.20, 0.40, 0.65, 0.85];
+    const rightPoints = [0.10, 0.35, 0.55, 0.78];
+
+    leftPoints.forEach((pct, i) => {
+      const pos = fadeStart + fadeDuration * pct;
+      // Current image slides up and off, next slides up into view simultaneously
+      brandTl.to(leftImgs[i],     { yPercent: -100, duration: slideDur, ease: "power1.inOut" }, pos);
+      brandTl.to(leftImgs[i + 1], { yPercent: 0,    duration: slideDur, ease: "power1.inOut" }, pos);
+    });
+
+    rightPoints.forEach((pct, i) => {
+      const pos = fadeStart + fadeDuration * pct;
+      brandTl.to(rightImgs[i],     { yPercent: -100, duration: slideDur, ease: "power1.inOut" }, pos);
+      brandTl.to(rightImgs[i + 1], { yPercent: 0,    duration: slideDur, ease: "power1.inOut" }, pos);
+    });
   }
 
   // Hold at the end — images are static, pin stays
