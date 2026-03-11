@@ -328,6 +328,52 @@
   background: rgba(0, 0, 0, 0.8);
 }
 
+/* ── Marquee Ticker ────────────────────────────────────────────────── */
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee {
+  overflow: hidden;
+  background: #000;
+  padding: 1.25rem 0;
+}
+
+.marquee__track {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: marquee-scroll 20s linear infinite;
+  will-change: transform;
+}
+
+.marquee__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+  flex-shrink: 0;
+}
+
+.marquee__item span {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+}
+
+.marquee__badge {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  margin: 0 0.75rem;
+}
+
+.marquee__badge #marquee-outer-text {
+  animation: spin-slow 30s linear infinite;
+  transform-origin: 122px 123.5px;
+}
+
 /* ── Desktop: two-column split (md: 768px+) ── */
 @media (min-width: 768px) {
   .brand-block {
