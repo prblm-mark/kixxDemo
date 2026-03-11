@@ -461,26 +461,27 @@ function initBrandIntroAnimations() {
     const leftImgs = block0.querySelectorAll(".brand-panel--left img");
     const rightImgs = block0.querySelectorAll(".brand-panel--right img");
     const tlDuration = brandTl.duration();
-    const fadeStart = 0.75;
-    const fadeDuration = tlDuration - fadeStart;
-    const slideDur = 0.8;
+    const driftStart = 0.75;
+    const driftRange = tlDuration - driftStart;
+    const leftCount = leftImgs.length - 1;   // 4 transitions for 5 images
+    const rightCount = rightImgs.length - 1;
 
-    // Staggered percentages — columns never swap at the same time
-    const leftPoints  = [0.20, 0.40, 0.65, 0.85];
-    const rightPoints = [0.10, 0.35, 0.55, 0.78];
+    // Left column: transitions spread evenly across the full range, no gaps
+    const leftDur = driftRange / leftCount;
+    for (let i = 0; i < leftCount; i++) {
+      const pos = driftStart + leftDur * i;
+      brandTl.to(leftImgs[i],     { yPercent: -100, duration: leftDur, ease: "none" }, pos);
+      brandTl.to(leftImgs[i + 1], { yPercent: 0,    duration: leftDur, ease: "none" }, pos);
+    }
 
-    leftPoints.forEach((pct, i) => {
-      const pos = fadeStart + fadeDuration * pct;
-      // Current image slides up and off, next slides up into view simultaneously
-      brandTl.to(leftImgs[i],     { yPercent: -100, duration: slideDur, ease: "power1.inOut" }, pos);
-      brandTl.to(leftImgs[i + 1], { yPercent: 0,    duration: slideDur, ease: "power1.inOut" }, pos);
-    });
-
-    rightPoints.forEach((pct, i) => {
-      const pos = fadeStart + fadeDuration * pct;
-      brandTl.to(rightImgs[i],     { yPercent: -100, duration: slideDur, ease: "power1.inOut" }, pos);
-      brandTl.to(rightImgs[i + 1], { yPercent: 0,    duration: slideDur, ease: "power1.inOut" }, pos);
-    });
+    // Right column: offset by half a step so columns never move in sync
+    const rightDur = driftRange / rightCount;
+    const rightOffset = driftStart + (rightDur * 0.5);
+    for (let i = 0; i < rightCount; i++) {
+      const pos = rightOffset + rightDur * i;
+      brandTl.to(rightImgs[i],     { yPercent: -100, duration: rightDur, ease: "none" }, pos);
+      brandTl.to(rightImgs[i + 1], { yPercent: 0,    duration: rightDur, ease: "none" }, pos);
+    }
   }
 
   // Hold at the end — images are static, pin stays
