@@ -150,6 +150,10 @@
 }
 
 /* ── Brand Intro Section ── */
+#smooth-wrapper {
+  z-index: 6;
+}
+
 #brand-intro {
   position: relative;
   z-index: 1;
