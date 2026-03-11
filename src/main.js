@@ -457,6 +457,7 @@ function initBrandIntroAnimations() {
   const actionVideos = document.querySelectorAll(".kixx-video-card video");
   const soundBtns = document.querySelectorAll(".kixx-sound-btn");
   const desktopMQ = window.matchMedia("(min-width: 768px)");
+  let activeVideo = null;
 
   function remuteBtnUI(video) {
     const btn = video.closest(".kixx-video-card").querySelector(".kixx-sound-btn");
@@ -466,50 +467,48 @@ function initBrandIntroAnimations() {
     }
   }
 
-  if (actionVideos.length) {
-    const firstVideo = actionVideos[0];
+  function pauseVideo(video) {
+    video.pause();
+    video.muted = true;
+    remuteBtnUI(video);
+  }
 
-    // IntersectionObserver — behaviour varies by platform
+  function playVideo(video) {
+    if (activeVideo && activeVideo !== video) {
+      pauseVideo(activeVideo);
+    }
+    activeVideo = video;
+    video.play().catch(() => {});
+  }
+
+  if (actionVideos.length) {
+    // IntersectionObserver — only play the most-visible card
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         const video = e.target;
-        const isFirst = video === firstVideo;
-
-        if (e.isIntersecting) {
-          if (desktopMQ.matches) {
-            // Desktop: only auto-play the first card; preload others
-            if (isFirst) {
-              video.play().catch(() => {});
-            } else {
-              video.load();
-            }
-          } else {
-            // Mobile: auto-play every visible card (TikTok-style snap)
-            video.play().catch(() => {});
-          }
-        } else {
-          // Out of view: pause + re-mute (both platforms)
-          video.pause();
-          video.muted = true;
-          remuteBtnUI(video);
+        if (e.isIntersecting && e.intersectionRatio >= 0.6) {
+          playVideo(video);
+        } else if (!e.isIntersecting) {
+          pauseVideo(video);
+          if (activeVideo === video) activeVideo = null;
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: [0, 0.6] });
 
     actionVideos.forEach((v) => io.observe(v));
 
-    // Desktop hover-to-play on non-first cards (also works on first)
+    // Desktop hover-to-play
     cards.forEach((card) => {
       const video = card.querySelector("video");
 
       card.addEventListener("mouseenter", () => {
         if (!desktopMQ.matches) return;
-        video.play().catch(() => {});
+        playVideo(video);
       });
 
       card.addEventListener("mouseleave", () => {
         if (!desktopMQ.matches) return;
-        video.pause(); // holds current frame
+        video.pause();
       });
     });
   }

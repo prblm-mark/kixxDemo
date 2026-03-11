@@ -299,6 +299,8 @@
   border-radius: 1rem;
   overflow: hidden;
   background: #171717;
+  will-change: transform;
+  contain: layout paint;
 }
 .kixx-video-card video {
   width: 100%;
