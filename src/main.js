@@ -392,8 +392,8 @@ function initBrandIntroAnimations() {
   } else {
     const leftImgs = block0.querySelectorAll(".brand-panel--left img");
     const rightImgs = block0.querySelectorAll(".brand-panel--right img");
-    leftImgs.forEach((img, i) => gsap.set(img, { yPercent: i === 0 ? 0 : 100 }));
-    rightImgs.forEach((img, i) => gsap.set(img, { yPercent: i === 0 ? 0 : 100 }));
+    leftImgs.forEach((img, i) => gsap.set(img, { yPercent: i === 0 ? 0 : 104 }));
+    rightImgs.forEach((img, i) => gsap.set(img, { yPercent: i === 0 ? 0 : 104 }));
   }
 
   // Single pinned timeline scrubbed by scroll
@@ -470,7 +470,7 @@ function initBrandIntroAnimations() {
     const leftDur = driftRange / leftCount;
     for (let i = 0; i < leftCount; i++) {
       const pos = driftStart + leftDur * i;
-      brandTl.to(leftImgs[i],     { yPercent: -100, duration: leftDur, ease: "none" }, pos);
+      brandTl.to(leftImgs[i],     { yPercent: -104, duration: leftDur, ease: "none" }, pos);
       brandTl.to(leftImgs[i + 1], { yPercent: 0,    duration: leftDur, ease: "none" }, pos);
     }
 
@@ -479,7 +479,7 @@ function initBrandIntroAnimations() {
     const rightOffset = driftStart + (rightDur * 0.5);
     for (let i = 0; i < rightCount; i++) {
       const pos = rightOffset + rightDur * i;
-      brandTl.to(rightImgs[i],     { yPercent: -100, duration: rightDur, ease: "none" }, pos);
+      brandTl.to(rightImgs[i],     { yPercent: -104, duration: rightDur, ease: "none" }, pos);
       brandTl.to(rightImgs[i + 1], { yPercent: 0,    duration: rightDur, ease: "none" }, pos);
     }
   }
