@@ -567,6 +567,58 @@
       </div>
     </section>
 
+    <!-- CTA repeat (static, no animations) -->
+    <section id="cta-repeat" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <video src="./src/media/kixx-hero.mp4"
+             muted playsinline loop autoplay
+             class="absolute inset-0 w-full h-full object-cover">
+      </video>
+      <div class="absolute inset-0 bg-black/50"></div>
+      <div class="relative z-10 flex flex-col items-center py-10 px-8 w-full">
+        <div class="text-center w-full">
+          <h2 class="font-title text-kixx-orange leading-[.85] text-[length:var(--clamp-headline-sm)]">
+            LETS GET THEM<br class="sm:hidden"> SIGNED UP.
+          </h2>
+          <p class="font-display text-white text-[length:var(--clamp-display-sm)] -mt-[.9em]">
+            #TEAMORANGE
+          </p>
+        </div>
+        <div class="flex flex-col items-center mt-4 md:mt-14 w-full">
+          <div class="flex flex-col gap-2 md:gap-6 w-full md:max-w-[40rem] items-center antialiased">
+            <div class="flex items-center w-full p-1 md:p-2 min-h-14 bg-white rounded-full">
+              <button class="booking-form__tab leading-tight flex-1 flex items-center justify-center min-h-12 py-2 px-4 md:p-4 rounded-full font-body text-sm md:text-lg font-medium text-center text-black" data-tab="academy">Find an Academy</button>
+              <button class="booking-form__tab leading-tight flex-1 flex items-center justify-center min-h-12 py-2 px-4 md:p-4 rounded-full font-body text-sm md:text-lg font-medium text-center text-black" data-tab="nursery">Nursery or School</button>
+            </div>
+            <div class="flex items-center w-full min-h-14 md:min-h-16 py-4 px-6 bg-white rounded-full">
+              <select class="booking-form__select flex-1 bg-transparent border-none outline-none font-body text-sm md:text-lg font-medium text-black">
+                <option value="" disabled selected>Postcode or Town</option>
+              </select>
+              <svg class="size-6 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 9L12 15L18 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="flex items-center w-full min-h-14 md:min-h-16 py-4 px-6 bg-white rounded-full">
+              <select class="booking-form__select flex-1 bg-transparent border-none outline-none font-body text-sm md:text-lg font-medium text-black">
+                <option value="" disabled selected>Child's Age</option>
+              </select>
+              <svg class="size-6 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 9L12 15L18 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <button class="booking-form__cta flex items-center justify-center w-full min-h-14 md:h-16 py-4 px-6 bg-kixx-orange rounded-full font-body text-base md:text-[1.375rem] font-extrabold leading-6 text-center whitespace-nowrap text-white">Find your nearest Kixx</button>
+          </div>
+          <div class="relative mt-6">
+            <div class="flex items-center justify-center gap-3 pt-1">
+              <svg class="size-6 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.137 4.99253C14.7094 2.09107 18.6091 1.4145 21.2941 3.77728C24.3225 6.44218 23.7257 11.2044 21.1533 14.1059C18.5809 17.0074 12.0004 21.6481 12.0004 21.6481L11.9993 21.6491L11.9982 21.6502V21.6481C11.9982 21.6481 5.41818 17.0074 2.84579 14.1059C0.273395 11.2044 -0.323472 6.44211 2.70497 3.77728C5.38996 1.41467 9.28936 2.09123 11.8617 4.99253C11.9084 5.04515 11.9541 5.0986 11.9991 5.15232C12.0442 5.09848 12.0902 5.04526 12.137 4.99253Z" fill="white"/>
+              </svg>
+              <p class="font-body text-sm md:text-base font-medium md:font-bold text-center whitespace-nowrap text-white">Trusted by 10,000+ Families</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Spacer to mark end of brand-intro -->
     <section id="brand-end" style="min-height: 100vh;"></section>
 
