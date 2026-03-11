@@ -374,8 +374,6 @@ function initBrandIntroAnimations() {
   if (!h2) return;
   if (!isDesktop && !strip) return;
 
-  // Hide text initially
-  gsap.set(textEl, { y: 400, opacity: 0 });
 
   // 6 subtitle steps + headline = 7 scroll beats, plus some breathing room
   const totalScroll = () => window.innerHeight * 12;
@@ -403,23 +401,17 @@ function initBrandIntroAnimations() {
       start: "top top",
       end: () => "+=" + (totalScroll() + window.innerHeight * 3),
       pin: true,
+      ...(isDesktop ? {} : { pinType: "fixed", anticipatePin: 1 }),
       scrub: 3,
       invalidateOnRefresh: true,
     },
   });
 
-  // Hold on first image before anything animates
-  brandTl.to({}, { duration: 0.75 });
-
-  // Phase 1: entire text block fades up into view (headline stays visible throughout)
-  brandTl.to(textEl, {
-    y: 0, opacity: 1,
-    duration: 1,
-    ease: "power2.out",
-  });
-
-  // Hold headline before subtitles start
-  brandTl.to({}, { duration: 0.5 });
+  // // Hold on first image before anything animates
+  // brandTl.to({}, { duration: 0.10 });
+  //
+  // // Hold headline before subtitles start
+  // brandTl.to({}, { duration: 0.10 });
 
   // Phase 2–7: subtitle carousel (6 steps) — headline remains visible
   subtitles.forEach((sub, i) => {
@@ -461,7 +453,7 @@ function initBrandIntroAnimations() {
     const leftImgs = block0.querySelectorAll(".brand-panel--left img");
     const rightImgs = block0.querySelectorAll(".brand-panel--right img");
     const tlDuration = brandTl.duration();
-    const driftStart = 0.75;
+    const driftStart = 0;
     const driftRange = tlDuration - driftStart;
     const leftCount = leftImgs.length - 1;   // 4 transitions for 5 images
     const rightCount = rightImgs.length - 1;
@@ -485,7 +477,7 @@ function initBrandIntroAnimations() {
   }
 
   // Hold at the end — images are static, pin stays
-  brandTl.to({}, { duration: 1.5 });
+  brandTl.to({}, { duration: 0.5 });
 }
 
 /* ── Kixx in Action: platform-aware video playback + sound toggle ── */
