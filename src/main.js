@@ -478,6 +478,46 @@ function initBrandIntroAnimations() {
   brandTl.to({}, { duration: 0.5 });
 }
 
+/* ── Booking Overlay ─────────────────────────────────────────────── */
+{
+  const overlay = document.getElementById("booking-overlay");
+  const closeBtn = document.getElementById("booking-overlay-close");
+  const navBtn = document.getElementById("nav-find-kixx");
+  const ctaBtns = document.querySelectorAll("button.booking-form__cta");
+  const overlayTabs = overlay.querySelectorAll(".booking-form__tab");
+
+  function openBookingOverlay() {
+    overlay.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeBookingOverlay() {
+    overlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  // Trigger buttons
+  if (navBtn) navBtn.addEventListener("click", openBookingOverlay);
+  ctaBtns.forEach(btn => btn.addEventListener("click", openBookingOverlay));
+
+  // Close handlers
+  closeBtn.addEventListener("click", closeBookingOverlay);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("is-open")) {
+      closeBookingOverlay();
+    }
+  });
+
+  // Tab toggle for overlay form
+  overlayTabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      overlayTabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+    });
+  });
+  overlay.querySelector(".booking-form__tab[data-tab='academy']")?.classList.add("active");
+}
+
 /* ── Kixx in Action: platform-aware video playback + sound toggle ── */
 {
   const cards = document.querySelectorAll(".kixx-video-card");
