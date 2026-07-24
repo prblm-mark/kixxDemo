@@ -22,7 +22,6 @@ document.fonts.ready.then(() => {
   const textNot            = document.getElementById("text-not");
   const wordIts            = document.getElementById("word-its");
   const wordAbout          = document.getElementById("word-about");
-  const logo               = document.getElementById("logo");
   const wipePanel          = document.getElementById("wipe-panel");
   const wordThe            = document.getElementById("word-the");
   const wordScore          = document.getElementById("word-score");
@@ -39,14 +38,6 @@ document.fonts.ready.then(() => {
   const wordIsAbout        = document.getElementById("word-is-about");
   const heroVideo          = document.getElementById("hero-video");
   const videoOverlay       = document.getElementById("video-overlay");
-  const heroCta            = document.getElementById("hero-cta");
-  const mainNav            = document.getElementById("main-nav");
-  const ctaTitle           = document.getElementById("cta-title");
-  const ctaSubtitle        = document.getElementById("cta-subtitle");
-  const bookingForm        = document.getElementById("booking-form");
-  const scrollIndicator    = document.getElementById("scroll-indicator");
-  const socialProof        = document.getElementById("social-proof");
-  const formTabs           = document.querySelectorAll(".booking-form__tab");
 
   // ── ScrollSmoother ──────────────────────────────────────────────────
 
@@ -75,7 +66,6 @@ document.fonts.ready.then(() => {
 
   gsap.set(headlineWords,     { opacity: 0, scale: 5, color: "#000000" });
   gsap.set(textNot,           { opacity: 0, scale: 0.5, xPercent: -50, yPercent: -50 });
-  /* logo lives inside #main-nav — slides in with the nav, no separate set needed */
   // Use GSAP's xPercent/yPercent for centering — survives transform changes and resize
   gsap.set(wordGrowth,        { opacity: 0, scale: 0, xPercent: -50, yPercent: -50 });
   gsap.set(growthRows,        { opacity: 0, y: 0, xPercent: -50, yPercent: -50 });
@@ -85,12 +75,6 @@ document.fonts.ready.then(() => {
   gsap.set([wordThatsWhat, wordIsAbout], { scale: 5 });
   gsap.set(wordKixxClosing,  { scale: 10, rotation: -12 });
   gsap.set(heroVideo,        { scale: videoStartScale, opacity: 0, transformOrigin: "center center" });
-  gsap.set(mainNav,          { y: "-100%" });
-  gsap.set(ctaTitle,         { scale: 3, opacity: 0, transformOrigin: "center center" });
-  gsap.set(ctaSubtitle,      { y: 20, opacity: 0 });
-  gsap.set(bookingForm,      { y: 30, opacity: 0 });
-  gsap.set(scrollIndicator,  { opacity: 0 });
-  gsap.set(socialProof,      { y: 20, opacity: 0 });
 
   // ── Master Timeline (paused — debug scrubber or asset preload triggers play) ─
 
@@ -296,16 +280,6 @@ document.fonts.ready.then(() => {
       typeof addDebugControls === "function") {
     addDebugControls(tl);
   }
-
-  // ── Form Tab Toggle ─────────────────────────────────────────────────
-
-  formTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      formTabs.forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-    });
-  });
-  document.querySelector(".booking-form__tab[data-tab='academy']")?.classList.add("active");
 
   // ── Asset Preload ───────────────────────────────────────────────────
   // No visible loader — the page shows the orange hero while assets decode,
