@@ -1,18 +1,16 @@
 /**
  * main.js — Kixx Football Academy hero animation
  *
- * Nine-phase GSAP timeline that plays after all assets are preloaded:
+ * Eight-phase GSAP timeline that plays after all assets are preloaded
+ * (no visible loader — the orange hero shows while assets decode):
  *   1. Headline words punch in        5. GROWTH outline rows fan out
  *   2. IT'S/ABOUT spread, NOT enters  6. GROWTH → REAL scramble + benefits
  *   3. Black wipe, colour inversion   7. Clear stage, video reveal
- *   4. IT'S/ABOUT exit, GROWTH enters 8. "THAT'S WHAT KIXX IS ABOUT"
- *                                     9. CTA form slides in
+ *   4. IT'S/ABOUT exit, GROWTH enters 8. "THAT'S WHAT KIXX IS ABOUT" (final frame)
  *
  * Dependencies: GSAP 3 core + ScrollTrigger, ScrollSmoother,
  *               TextPlugin, ScrambleTextPlugin, SplitText (all via CDN)
  */
-
-const loadStartTime = Date.now();
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother, TextPlugin, ScrambleTextPlugin, SplitText);
 
@@ -94,7 +92,7 @@ document.fonts.ready.then(() => {
   gsap.set(scrollIndicator,  { opacity: 0 });
   gsap.set(socialProof,      { y: 20, opacity: 0 });
 
-  // ── Master Timeline (paused — debug scrubber or loader triggers play) ─
+  // ── Master Timeline (paused — debug scrubber or asset preload triggers play) ─
 
   const tl = gsap.timeline({ paused: true });
 
@@ -284,31 +282,20 @@ document.fonts.ready.then(() => {
 
   // ── Phase 8: "THAT'S WHAT KIXX IS ABOUT" punches in over video ──────
 
+  // Animation ends here — the closing statement stays on screen over the video.
+
   tl.addLabel("phase8", "phase7+=0.4")
     .to(wordThatsWhat,   { opacity: 1, scale: 1, duration: 0.4,  ease: "expo.out" }, "phase8+=0.05")
     .to(wordIsAbout,     { opacity: 1, scale: 1, duration: 0.4,  ease: "expo.out" }, "phase8+=0.13")
-    .to(wordKixxClosing, { opacity: 1, scale: 1, duration: 0.55, ease: "expo.out" }, "phase8+=0.22")
-
-    // Phase 8 exit — words scatter
-    .addLabel("phase8exit", "phase8+=0.9")
-    .to(wordKixxClosing, { opacity: 0, duration: 0.4, ease: "power2.in" }, "phase8exit")
-    .to(wordThatsWhat,   { y: "-120%", opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05")
-    .to(wordIsAbout,     { y: "120%",  opacity: 0, duration: 0.5, ease: "expo.in" }, "phase8exit+=0.05");
-
-  // ── Phase 9: CTA form + nav slide in ────────────────────────────────
-
-  tl.addLabel("phase9", "phase8exit+=0.55")
-    .to(mainNav,         { y: "0%",  duration: 0.55, ease: "power3.out" },           "phase9")
-    .to(ctaTitle,        { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, "phase9+=0.15")
-    .to(bookingForm,     { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" },     "phase9+=0.35")
-    .to(ctaSubtitle,     { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },     "phase9+=0.45")
-    .to(socialProof,     { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },     "phase9+=0.55")
-    .to(scrollIndicator, { opacity: 1, duration: 0.4, ease: "power2.out" },           "phase9+=0.6")
-    .call(() => { heroCta.style.pointerEvents = "auto"; }, null, "phase9+=0.9");
+    .to(wordKixxClosing, { opacity: 1, scale: 1, duration: 0.55, ease: "expo.out" }, "phase8+=0.22");
 
   // ── Debug Scrubber (dev only — see src/debug-controls.js) ───────────
+  // Opt-in via ?debug so the embedded/production build stays clean.
 
-  addDebugControls(tl);
+  if (new URLSearchParams(location.search).has("debug") &&
+      typeof addDebugControls === "function") {
+    addDebugControls(tl);
+  }
 
   // ── Form Tab Toggle ─────────────────────────────────────────────────
 
@@ -320,7 +307,9 @@ document.fonts.ready.then(() => {
   });
   document.querySelector(".booking-form__tab[data-tab='academy']")?.classList.add("active");
 
-  // ── Asset Preload & Loader Fade-out ─────────────────────────────────
+  // ── Asset Preload ───────────────────────────────────────────────────
+  // No visible loader — the page shows the orange hero while assets decode,
+  // then the timeline plays. Preloading keeps the photo cycle / video gapless.
 
   // Wait for all growth photos to fully decode before starting the timeline
   const imagePromises = Array.from(growthPhotos).map(img => new Promise(resolve => {
@@ -339,22 +328,8 @@ document.fonts.ready.then(() => {
     heroVideo.load();
   });
 
-  // Ensure loader shows for at least 1s so the animation feels intentional
-  const elapsed = Date.now() - loadStartTime;
-  const minDelayPromise = new Promise(resolve =>
-    setTimeout(resolve, Math.max(0, 1000 - elapsed))
-  );
-
-  const loader = document.getElementById("loader");
-
-  Promise.all([...imagePromises, videoLoadPromise, minDelayPromise]).then(() => {
-    gsap.to(loader, {
-      opacity: 0, duration: 0.6, ease: "power2.inOut",
-      onComplete: () => {
-        loader.style.display = "none";
-        tl.play();
-      },
-    });
+  Promise.all([...imagePromises, videoLoadPromise]).then(() => {
+    tl.play();
   });
 
 });
